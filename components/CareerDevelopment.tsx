@@ -1,32 +1,84 @@
 export default function CareerDevelopment() {
+    const activities = [
+        'Internship Support',
+        'Higher Education / Foreign Education Guidance',
+        'Aptitude Training',
+        'Soft Skills / Personality Development',
+        'Mock Interview',
+        'On-Campus and Off-Campus Recruitment',
+        'Training for IELTS, TOEFL, GRE, GMAT, CAT, GPSC, UPSC and more',
+    ];
+
     return (
-        <section id="about" className="wow fadeInUp">
+        <section id="about" className="wow fadeInUp" style={{
+            background: 'var(--bg-primary)',
+            padding: '80px 0',
+        }}>
             <div className="container">
-                <div className="row" style={{ marginLeft: '10px' }}>
-                    <div className="section-header content">
-                        <h2></h2><h2 style={{ paddingTop: '20px' }}>Career Development & Placement</h2>
-                        <br /><h3 className="text-justify"><big>The Career Development and Placement Cell (CDPC) is a vital cell that supports students&apos; professional growth and connects them with lucrative opportunities. It provides career counseling, skill development workshops, resume-building assistance, interview preparation, and partnerships with employers. Its mission is to empower students with the resources and knowledge needed for a successful career journey.</big></h3>
-                        <br />
-                        <h5><b>Activities Carried Out:</b></h5><br />
-                        <ul>
-                            <li><i className="ion-android-checkmark-circle"></i> Internship Support</li>
-                            <li><i className="ion-android-checkmark-circle"></i> Higher Education / Foreign Education Guidance</li>
-                            <li><i className="ion-android-checkmark-circle"></i> Aptitude Training</li>
-                            <li><i className="ion-android-checkmark-circle"></i> Soft Skills / Personality Development</li>
-                            <li><i className="ion-android-checkmark-circle"></i> Mock Interview</li>
-                            <li><i className="ion-android-checkmark-circle"></i> On-Campus and Off-Campus Recruitment</li>
-                            <li><i className="ion-android-checkmark-circle"></i> Training for IELTS, TOEFL, GRE, GMAT, CAT, GPSC, UPSC and more</li>
-                        </ul>
+                <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+                    <div className="ds-badge" style={{ display: 'inline-flex' }}>
+                        Career Support
                     </div>
                 </div>
-                {/*   <b>What do our students do after study?</b>
-        <br>Students are upsurged with ample amount of exposure such as jobs with handsome packages, extravagant business and start-up ideologies as well as pursue acceleration in higher studies.  
-        <br><br>
-          <ul>
-            <li><i>850+ Students received job offers from campus</i></li>
-            <li><i>700+ Students opted for Higher Studies</i></li>
-            <li><i>100+ Students joined family business or started their own Startup</i></li>
-          </ul> */}
+                <div className="section-header" style={{ marginBottom: '40px' }}>
+                    <h2 style={{
+                        fontFamily: 'var(--font-display)',
+                        fontSize: '2.5rem',
+                        fontWeight: 800,
+                        letterSpacing: '-0.03em',
+                    }}>
+                        Career Development & <span className="gradient-text">Placement</span>
+                    </h2>
+                </div>
+
+                <div className="row" style={{ justifyContent: 'center' }}>
+                    <div className="col-lg-10">
+                        <div style={{
+                            background: 'var(--bg-card)',
+                            border: '1px solid var(--border-card)',
+                            borderRadius: 'var(--radius-lg)',
+                            padding: '36px 40px',
+                        }}>
+                            <p style={{
+                                color: 'var(--text-secondary)',
+                                fontSize: '15px',
+                                lineHeight: 1.8,
+                                marginBottom: '28px',
+                            }}>
+                                The Career Development and Placement Cell (CDPC) is a vital cell that supports students&apos; professional growth and connects them with lucrative opportunities. It provides career counseling, skill development workshops, resume-building assistance, interview preparation, and partnerships with employers. Its mission is to empower students with the resources and knowledge needed for a successful career journey.
+                            </p>
+
+                            <h5 style={{
+                                color: 'var(--text-white)',
+                                fontFamily: 'var(--font-display)',
+                                fontWeight: 700,
+                                fontSize: '16px',
+                                marginBottom: '20px',
+                            }}>Activities Carried Out:</h5>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '10px' }}>
+                                {activities.map((activity, i) => (
+                                    <div key={i} style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        padding: '8px 0',
+                                    }}>
+                                        <i className="fa fa-check-circle" style={{
+                                            color: 'var(--cyan-400)',
+                                            fontSize: '14px',
+                                            minWidth: '14px',
+                                        }}></i>
+                                        <span style={{
+                                            color: 'var(--text-secondary)',
+                                            fontSize: '14px',
+                                        }}>{activity}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
