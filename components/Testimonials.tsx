@@ -1,101 +1,62 @@
-export default function Testimonials() {
-    const testimonials = [
-        {
-            text: `I am delighted to share my heartfelt experience as a proud student of B.Tech, AIML at CSPIT, Charotar University of Science and Technology. From the moment I stepped onto the campus, I was captivated by the vibrant academic atmosphere and the commitment of the faculty to fostering a culture of excellence. The importance given to practical application, along with extra-curricular opportunities, has not only enhanced my technical skills but also cultivated holistic development. The plethora of extracurricular activities and events have not only allowed me to pursue my passion but also provided a platform to develop essential life skills such as teamwork, leadership, and effective communication. I am grateful for this transformative journey and confident that the knowledge, skills, and values imbibed here have become the cornerstone of my success in the professional world.`,
-            name: 'Pooja Mehta',
-            role: 'Student',
-        },
-        {
-            text: `Being part of this esteemed department has truly been a transformative journey for me, providing an enriching research environment and fostering a collaborative spirit that has opened up numerous opportunities for academic and personal growth. The collaborative atmosphere within the department has been a key factor in my academic success. The emphasis on teamwork and knowledge sharing has allowed me to engage in meaningful collaborations with fellow students and faculty members. Additionally, the department's support for extracurricular activities has provided me with a myriad of opportunities to participate in various clubs and initiatives. These experiences have not only enhanced my technical skills but have also allowed me to develop essential soft skills such as leadership, communication, and teamwork.`,
-            name: 'Neel Shah',
-            role: 'Student',
-        },
-        {
-            text: `As a part of the AI & ML department, I can confidently say that our department offers a program specializing in AI and ML that provides students with ample resources to pursue their passions in the field. The faculties here are committed to providing practical, hands-on learning in Collaboration with leading tech companies such as NVIDIA and incorporating innovative learning experiences such as MOOCs. The program emphasizes collaboration and community, providing opportunities for group projects and mentorship, and enabling students to learn and grow alongside their peers. Students can build valuable relationships and connections that will undoubtedly serve them well in the future.`,
-            name: 'BARAI AUM DHIRENBHAI',
-            role: 'Student',
-        },
-        {
-            text: `Our AI & ML department features an exclusive program, offering students abundant resources for dedicated pursuits in the field. Committed faculty members ensure practical, hands-on learning, collaborating with tech leaders like Samatrix. Innovative learning experiences, including NPTEL courses, enhance the curriculum's relevance. Emphasizing collaboration, students engage in group projects and benefit from mentorship, fostering a supportive community. The program not only imparts technical skills but also encourages networking and personal growth. Joining us opens avenues for students to build valuable connections, ensuring a future brimming with success in the ever-evolving realms of AI and ML.`,
-            name: 'OM BAMBHROLIYA',
-            role: 'Student',
-        },
-    ];
+const testimonials = [
+    { text: `I am delighted to share my heartfelt experience as a proud student of B.Tech, AIML at CSPIT, Charotar University of Science and Technology. From the moment I stepped onto the campus, I was captivated by the vibrant academic atmosphere and the commitment of the faculty to fostering a culture of excellence. The importance given to practical application, along with extra-curricular opportunities, has not only enhanced my technical skills but also cultivated holistic development.`, name: 'Pooja Mehta', role: 'B.Tech AI-ML Student' },
+    { text: `Being part of this esteemed department has truly been a transformative journey for me, providing an enriching research environment and fostering a collaborative spirit that has opened up numerous opportunities for academic and personal growth. The collaborative atmosphere within the department has been a key factor in my academic success. The emphasis on teamwork and knowledge sharing has allowed me to engage in meaningful collaborations with fellow students and faculty members.`, name: 'Neel Shah', role: 'B.Tech AI-ML Student' },
+    { text: `As a part of the AI & ML department, I can confidently say that our department offers a program specializing in AI and ML that provides students with ample resources to pursue their passions in the field. The faculties here are committed to providing practical, hands-on learning in collaboration with leading tech companies such as NVIDIA and incorporating innovative learning experiences such as MOOCs.`, name: 'Barai Aum Dhirenbhai', role: 'B.Tech AI-ML Student' },
+    { text: `Our AI & ML department features an exclusive program, offering students abundant resources for dedicated pursuits in the field. Committed faculty members ensure practical, hands-on learning, collaborating with tech leaders like Samatrix. Innovative learning experiences, including NPTEL courses, enhance the curriculum's relevance. Emphasizing collaboration, students engage in group projects and benefit from mentorship, fostering a supportive community.`, name: 'Om Bambhroliya', role: 'B.Tech AI-ML Student' },
+];
 
+export default function Testimonials() {
     return (
-        <section id="testimonials" className="wow fadeInUp" style={{
-            background: 'var(--bg-surface)',
-            padding: '80px 0',
-        }}>
+        <section id="testimonials" className="wow fadeInUp" style={{ background: 'var(--bg-primary)', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                    <div className="ds-badge" style={{ display: 'inline-flex' }}>
-                        Student Voices
-                    </div>
-                </div>
-                <div className="section-header" style={{ marginBottom: '50px' }}>
-                    <h2 style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '2.5rem',
-                        fontWeight: 800,
-                        letterSpacing: '-0.03em',
+                    <span style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '8px',
+                        background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)',
+                        borderRadius: '9999px', padding: '6px 18px', fontSize: '11px',
+                        fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' as const,
+                        color: '#22d3ee', fontFamily: 'var(--font-body)',
                     }}>
-                        <span className="gradient-text">Testimonials</span>
-                    </h2>
+                        <i className="fa fa-quote-left" style={{ fontSize: '11px' }} />
+                        Student Voices
+                    </span>
                 </div>
+                <h2 style={{
+                    textAlign: 'center', fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(1.8rem,3.5vw,2.6rem)', fontWeight: 800,
+                    color: '#f0f6fc', letterSpacing: '-0.03em', marginBottom: '16px',
+                }}>
+                    What Students{' '}
+                    <span style={{ background: 'linear-gradient(135deg,#06b6d4,#22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                        Say
+                    </span>
+                </h2>
+                <p style={{ textAlign: 'center', color: '#8b99b0', fontSize: '15px', marginBottom: '50px' }}>
+                    Hear from our students about their experience at CSPIT AI-ML
+                </p>
 
                 <div className="owl-carousel testimonials-carousel" suppressHydrationWarning>
                     {testimonials.map((t, i) => (
-                        <div key={i} className="testimonial-item" style={{
-                            background: 'var(--bg-card)',
-                            border: '1px solid var(--border-card)',
-                            borderRadius: 'var(--radius-lg)',
-                            padding: '32px',
-                            margin: '10px',
-                            position: 'relative',
+                        <div key={i} style={{
+                            background: '#0d1530', border: '1px solid rgba(34,211,238,0.1)',
+                            borderRadius: '16px', padding: '32px', margin: '10px',
+                            position: 'relative', overflow: 'hidden',
                         }}>
-                            {/* Quote icon */}
-                            <div style={{
-                                position: 'absolute',
-                                top: '20px',
-                                right: '24px',
-                                fontSize: '48px',
-                                color: 'rgba(6, 182, 212, 0.1)',
-                                fontFamily: 'Georgia, serif',
-                                lineHeight: 1,
-                            }}>&ldquo;</div>
-
-                            <p className="scroll" style={{
-                                color: 'var(--text-secondary)',
-                                fontSize: '14px',
-                                lineHeight: 1.7,
-                                height: '250px',
-                                overflow: 'auto',
-                                paddingRight: '8px',
-                                paddingTop: '5px',
-                            }}>
-                                {t.text}
-                            </p>
-                            <div style={{
-                                borderTop: '1px solid var(--border-subtle)',
-                                paddingTop: '16px',
-                                marginTop: '16px',
-                            }}>
-                                <h3 style={{
-                                    color: 'var(--text-white)',
-                                    fontFamily: 'var(--font-display)',
-                                    fontWeight: 700,
-                                    fontSize: '16px',
-                                    margin: '0 0 4px 0',
-                                }}>{t.name}</h3>
-                                <h4 style={{
-                                    color: 'var(--cyan-400)',
-                                    fontSize: '12px',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1px',
-                                    fontWeight: 500,
-                                    margin: 0,
-                                }}>{t.role}</h4>
+                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(135deg,#06b6d4,#22d3ee)' }} />
+                            {/* Big quote */}
+                            <div style={{ fontSize: '56px', color: 'rgba(6,182,212,0.15)', fontFamily: 'Georgia,serif', lineHeight: 1, marginBottom: '8px' }}>&ldquo;</div>
+                            <p style={{
+                                color: '#8b99b0', fontSize: '14px', lineHeight: 1.8,
+                                height: '200px', overflow: 'auto', paddingRight: '4px', margin: '0 0 20px',
+                            }}>{t.text}</p>
+                            <div style={{ borderTop: '1px solid rgba(34,211,238,0.1)', paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <div style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg,#06b6d4,#22d3ee)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                    <i className="fa fa-user" style={{ color: '#060b18', fontSize: '16px' }} />
+                                </div>
+                                <div>
+                                    <h3 style={{ color: '#f0f6fc', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '15px', margin: '0 0 2px' }}>{t.name}</h3>
+                                    <h4 style={{ color: '#22d3ee', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600, margin: 0 }}>{t.role}</h4>
+                                </div>
                             </div>
                         </div>
                     ))}

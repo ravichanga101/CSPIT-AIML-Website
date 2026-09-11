@@ -7,10 +7,10 @@ export default function MainMenu() {
     return (
         <>
             {/* Header */}
-            <header id="header">
-                <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div id="logo">
-                        <Link href="/" className="scrollto" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <header id="header" style={{ height: '64px' }}>
+                <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px', padding: '0 4px' }}>
+                    <div id="logo" style={{ display: 'flex', alignItems: 'center', height: '64px' }}>
+                        <Link href="/" className="scrollto" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', height: '64px' }}>
                             {/* Department Logo */}
                             <img
                                 src="/img/logo/aiml-logo.jpg"
@@ -45,8 +45,8 @@ export default function MainMenu() {
                             </span>
                         </Link>
                     </div>
-                    <nav id="nav-menu-container">
-                        <ul className="nav-menu">
+                    <nav id="nav-menu-container" style={{ display: 'flex', alignItems: 'center', height: '64px' }}>
+                        <ul className="nav-menu" style={{ display: 'flex', alignItems: 'center', height: '64px', margin: 0, padding: 0 }}>
                             <li><Link href="/">Home</Link></li>
                             <li className="menu-has-children"><Link href="/#about_us">About</Link>
                                 <ul>
@@ -90,7 +90,7 @@ export default function MainMenu() {
                                     <li><Link href="/325">Motorola Lab(325)</Link></li>
                                 </ul>
                             </li>
-                            <li className="menu-has-children"><a href="https://admission.charusat.ac.in/" target="_blank">Admission</a></li>
+                            <li className="nav-admission"><a href="https://admission.charusat.ac.in/" target="_blank">Admission</a></li>
                         </ul>
 
                     </nav>

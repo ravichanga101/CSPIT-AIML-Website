@@ -16,7 +16,16 @@ jQuery(document).ready(function( $ ) {
   });
 
   // Stick the header at top on scroll
-  $("#header").sticky({topSpacing:0, zIndex: '50'});
+  $("#header").sticky({topSpacing:10, zIndex: '9999'});
+
+  // Keep navbar floating with gap on scroll
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 50) {
+      $('#header').addClass('header-scrolled');
+    } else {
+      $('#header').removeClass('header-scrolled');
+    }
+  });
 
   // Intro background carousel
   $("#intro-carousel").owlCarousel({

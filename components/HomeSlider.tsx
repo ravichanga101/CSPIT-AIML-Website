@@ -78,12 +78,6 @@ export default function HomeSlider() {
                 <div className="row" style={{ alignItems: 'center' }}>
                     {/* Left Content */}
                     <div className="col-lg-7" style={{ marginBottom: '40px' }}>
-                        {/* Badge */}
-                        <div className="ds-badge hero-badge-anim" style={{ marginBottom: '28px' }}>
-                            <span className="badge-pulse" />
-                            CSPIT • ESTD. {config.dept_esta}
-                        </div>
-
                         {/* Heading */}
                         <h1 className="hero-heading">
                             Department of

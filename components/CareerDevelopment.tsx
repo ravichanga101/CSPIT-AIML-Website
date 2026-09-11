@@ -1,78 +1,69 @@
-export default function CareerDevelopment() {
-    const activities = [
-        'Internship Support',
-        'Higher Education / Foreign Education Guidance',
-        'Aptitude Training',
-        'Soft Skills / Personality Development',
-        'Mock Interview',
-        'On-Campus and Off-Campus Recruitment',
-        'Training for IELTS, TOEFL, GRE, GMAT, CAT, GPSC, UPSC and more',
-    ];
+const activities = [
+    { icon: 'fa-suitcase', text: 'Internship Support' },
+    { icon: 'fa-plane', text: 'Higher Education / Foreign Education Guidance' },
+    { icon: 'fa-pencil-square-o', text: 'Aptitude Training' },
+    { icon: 'fa-user', text: 'Soft Skills / Personality Development' },
+    { icon: 'fa-microphone', text: 'Mock Interview' },
+    { icon: 'fa-building', text: 'On-Campus and Off-Campus Recruitment' },
+    { icon: 'fa-book', text: 'Training for IELTS, TOEFL, GRE, GMAT, CAT, GPSC, UPSC and more' },
+];
 
+export default function CareerDevelopment() {
     return (
-        <section id="about" className="wow fadeInUp" style={{
-            background: 'var(--bg-primary)',
-            padding: '80px 0',
-        }}>
+        <section id="about" className="wow fadeInUp" style={{ background: 'var(--bg-surface)', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                    <div className="ds-badge" style={{ display: 'inline-flex' }}>
-                        Career Support
-                    </div>
-                </div>
-                <div className="section-header" style={{ marginBottom: '40px' }}>
-                    <h2 style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '2.5rem',
-                        fontWeight: 800,
-                        letterSpacing: '-0.03em',
+                    <span style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '8px',
+                        background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)',
+                        borderRadius: '9999px', padding: '6px 18px', fontSize: '11px',
+                        fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' as const,
+                        color: '#22d3ee', fontFamily: 'var(--font-body)',
                     }}>
-                        Career Development & <span className="gradient-text">Placement</span>
-                    </h2>
+                        <i className="fa fa-line-chart" style={{ fontSize: '11px' }} />
+                        Career Support
+                    </span>
                 </div>
+                <h2 style={{
+                    textAlign: 'center', fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(1.8rem,3.5vw,2.6rem)', fontWeight: 800,
+                    color: '#f0f6fc', letterSpacing: '-0.03em', marginBottom: '52px',
+                }}>
+                    Career Development &amp;{' '}
+                    <span style={{ background: 'linear-gradient(135deg,#06b6d4,#22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                        Placement
+                    </span>
+                </h2>
 
                 <div className="row" style={{ justifyContent: 'center' }}>
                     <div className="col-lg-10">
+                        {/* Description card */}
                         <div style={{
-                            background: 'var(--bg-card)',
-                            border: '1px solid var(--border-card)',
-                            borderRadius: 'var(--radius-lg)',
-                            padding: '36px 40px',
+                            background: '#0d1530', border: '1px solid rgba(34,211,238,0.1)',
+                            borderRadius: '16px', padding: '36px 40px', marginBottom: '24px',
+                            position: 'relative', overflow: 'hidden',
                         }}>
-                            <p style={{
-                                color: 'var(--text-secondary)',
-                                fontSize: '15px',
-                                lineHeight: 1.8,
-                                marginBottom: '28px',
-                            }}>
-                                The Career Development and Placement Cell (CDPC) is a vital cell that supports students&apos; professional growth and connects them with lucrative opportunities. It provides career counseling, skill development workshops, resume-building assistance, interview preparation, and partnerships with employers. Its mission is to empower students with the resources and knowledge needed for a successful career journey.
+                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(135deg,#06b6d4,#22d3ee)' }} />
+                            <p style={{ color: '#8b99b0', fontSize: '15px', lineHeight: 1.8, margin: 0 }}>
+                                The Career Development and Placement Cell (CDPC) supports students&apos; professional growth and connects them with lucrative opportunities. It provides career counseling, skill development workshops, resume-building assistance, interview preparation, and partnerships with employers.
                             </p>
+                        </div>
 
-                            <h5 style={{
-                                color: 'var(--text-white)',
-                                fontFamily: 'var(--font-display)',
-                                fontWeight: 700,
-                                fontSize: '16px',
-                                marginBottom: '20px',
-                            }}>Activities Carried Out:</h5>
-
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '10px' }}>
-                                {activities.map((activity, i) => (
-                                    <div key={i} style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '10px',
-                                        padding: '8px 0',
-                                    }}>
-                                        <i className="fa fa-check-circle" style={{
-                                            color: 'var(--cyan-400)',
-                                            fontSize: '14px',
-                                            minWidth: '14px',
-                                        }}></i>
-                                        <span style={{
-                                            color: 'var(--text-secondary)',
-                                            fontSize: '14px',
-                                        }}>{activity}</span>
+                        {/* Activities grid */}
+                        <div style={{
+                            background: '#0d1530', border: '1px solid rgba(34,211,238,0.08)',
+                            borderRadius: '16px', padding: '32px 40px',
+                        }}>
+                            <h5 style={{ color: '#f0f6fc', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '16px', marginBottom: '24px' }}>
+                                Activities Carried Out
+                            </h5>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: '12px' }}>
+                                {activities.map((a, i) => (
+                                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', background: 'rgba(6,182,212,0.05)', borderRadius: '10px', border: '1px solid rgba(6,182,212,0.08)' }}>
+                                        <div style={{ width: '32px', height: '32px', minWidth: '32px', background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.25)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <i className={`fa ${a.icon}`} style={{ color: '#22d3ee', fontSize: '13px' }} />
+                                        </div>
+                                        <span style={{ color: '#8b99b0', fontSize: '13px', lineHeight: 1.4 }}>{a.text}</span>
                                     </div>
                                 ))}
                             </div>
