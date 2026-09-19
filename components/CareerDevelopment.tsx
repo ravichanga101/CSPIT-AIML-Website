@@ -10,36 +10,18 @@ const activities = [
 
 export default function CareerDevelopment() {
     return (
-        <section id="about" className="wow fadeInUp" style={{ background: 'var(--bg-surface)', padding: '90px 0' }}>
+        <section id="about" className="wow fadeInUp" style={{ background: 'var(--bg)', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                    <span style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '8px',
-                        background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)',
-                        borderRadius: '9999px', padding: '6px 18px', fontSize: '11px',
-                        fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' as const,
-                        color: '#22d3ee', fontFamily: 'var(--font-body)',
-                    }}>
-                        <i className="fa fa-line-chart" style={{ fontSize: '11px' }} />
-                        Career Support
-                    </span>
+                    <span className="ref-badge"><i className="fa fa-line-chart" />Career Support</span>
                 </div>
-                <h2 style={{
-                    textAlign: 'center', fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(1.8rem,3.5vw,2.6rem)', fontWeight: 800,
-                    color: '#f0f6fc', letterSpacing: '-0.03em', marginBottom: '52px',
-                }}>
-                    Career Development &amp;{' '}
-                    <span style={{ background: 'linear-gradient(135deg,#06b6d4,#22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                        Placement
-                    </span>
-                </h2>
+                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '52px' }}>Career Development &amp; <span className="grad-cyan">Placement</span></h2>
 
                 <div className="row" style={{ justifyContent: 'center' }}>
                     <div className="col-lg-10">
                         {/* Description card */}
                         <div style={{
-                            background: '#0d1530', border: '1px solid rgba(34,211,238,0.1)',
+                            background: 'var(--bg-card)', border: '1px solid rgba(34,211,238,0.1)',
                             borderRadius: '16px', padding: '36px 40px', marginBottom: '24px',
                             position: 'relative', overflow: 'hidden',
                         }}>
@@ -51,7 +33,7 @@ export default function CareerDevelopment() {
 
                         {/* Activities grid */}
                         <div style={{
-                            background: '#0d1530', border: '1px solid rgba(34,211,238,0.08)',
+                            background: 'var(--bg-card)', border: '1px solid rgba(34,211,238,0.08)',
                             borderRadius: '16px', padding: '32px 40px',
                         }}>
                             <h5 style={{ color: '#f0f6fc', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '16px', marginBottom: '24px' }}>

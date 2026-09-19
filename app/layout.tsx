@@ -3,6 +3,7 @@ import './globals.css';
 import { config } from '@/lib/config';
 import MainMenu from '@/components/MainMenu';
 import Footer from '@/components/Footer';
+import DynamicBackground from '@/components/DynamicBackground';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
@@ -25,8 +26,9 @@ export default function RootLayout({
         <link href="/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
         {/* Google Fonts */}
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
         {/* Global CSS from php include/header.php */}
         <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -39,6 +41,7 @@ export default function RootLayout({
         <link href="/css/design.css" rel="stylesheet" />
       </head>
       <body id="body">
+        <DynamicBackground />
         <MainMenu />
         {children}
         <Footer />

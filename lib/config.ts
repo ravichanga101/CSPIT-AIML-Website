@@ -68,7 +68,8 @@ export const links = {
         6: '/img/portfolio/6.JPG',
         7: '/img/portfolio/7.JPG',
         8: '/img/portfolio/8.jpeg',
-        9: '/img/portfolio/9.JPG',
+        9: '/img/portfolio/9.jpg',
+        10: '/img/portfolio/10.png',
     } as Record<number, string>,
 
     faculty: {

@@ -9,13 +9,19 @@ import CareerDevelopment from '@/components/CareerDevelopment';
 import Testimonials from '@/components/Testimonials';
 import StudentClubs from '@/components/StudentClubs';
 import StudentAchievements from '@/components/StudentAchievements';
+import FacultyAchievements from '@/components/FacultyAchievements';
 import Gallery from '@/components/Gallery';
 import ContactUs from '@/components/ContactUs';
+import { getImagesFromFolder } from '@/lib/getImages';
 
 export default function Home() {
+  // ONE shared folder for both the hero slider and the gallery.
+  // Just drop images into public/img/photos — no code changes needed!
+  const photos = getImagesFromFolder('img/photos');
+
   return (
     <>
-      <HomeSlider />
+      <HomeSlider images={photos} />
       <AboutUs />
       <BestPractices />
       <VisionMission />
@@ -26,8 +32,9 @@ export default function Home() {
       <CareerDevelopment />
       <Testimonials />
       <StudentClubs />
+      <FacultyAchievements />
       <StudentAchievements />
-      <Gallery />
+      <Gallery images={photos} />
       <ContactUs />
     </>
   );

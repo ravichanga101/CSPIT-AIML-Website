@@ -28,30 +28,12 @@ const iconColors = [
 
 export default function BestPractices() {
     return (
-        <section id="services" className="wow fadeInUp" style={{ background: 'var(--bg-surface)', padding: '90px 0' }}>
+        <section id="services" className="wow fadeInUp" style={{ background: 'var(--bg)', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                    <span style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '8px',
-                        background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)',
-                        borderRadius: '9999px', padding: '6px 18px', fontSize: '11px',
-                        fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' as const,
-                        color: '#22d3ee', fontFamily: 'var(--font-body)',
-                    }}>
-                        <i className="fa fa-star" style={{ fontSize: '11px' }} />
-                        Academic Distinction
-                    </span>
+                    <span className="ref-badge"><i className="fa fa-star" />Academic Distinction</span>
                 </div>
-                <h2 style={{
-                    textAlign: 'center', fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(1.8rem,3.5vw,2.6rem)', fontWeight: 800,
-                    color: '#f0f6fc', letterSpacing: '-0.03em', marginBottom: '50px',
-                }}>
-                    Best{' '}
-                    <span style={{ background: 'linear-gradient(135deg,#06b6d4,#22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                        Practices
-                    </span>
-                </h2>
+                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '50px' }}>Best <span className="grad-cyan">Practices</span></h2>
 
                 <div className="row">
                     {practices.map((item, i) => {
@@ -59,13 +41,13 @@ export default function BestPractices() {
                         return (
                             <div key={i} className="col-lg-6 col-md-6" style={{ marginBottom: '12px' }}>
                                 <div style={{
-                                    background: '#0d1530', border: '1px solid rgba(34,211,238,0.08)',
+                                    background: 'var(--bg-card)', border: '1px solid var(--border)',
                                     borderRadius: '12px', padding: '16px 20px',
                                     display: 'flex', alignItems: 'center', gap: '16px',
                                     transition: 'all 0.3s ease', cursor: 'default',
                                 }}
-                                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = c.border; el.style.transform = 'translateX(4px)'; el.style.boxShadow = `0 4px 20px rgba(0,0,0,0.2)`; }}
-                                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(34,211,238,0.08)'; el.style.transform = 'translateX(0)'; el.style.boxShadow = 'none'; }}
+                                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = c.border; el.style.transform = 'translateX(5px)'; el.style.boxShadow = '0 4px 20px rgba(0,0,0,.3)'; }}
+                                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateX(0)'; el.style.boxShadow = 'none'; }}
                                 >
                                     <div style={{
                                         width: '40px', height: '40px', minWidth: '40px',
