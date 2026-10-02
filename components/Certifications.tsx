@@ -2,14 +2,14 @@
 
 const certs = [
     { img: '/img/certifications/redhat.png', name: 'Red Hat Academy',  contact: 'Prof. Sarita Thummar',  email: 'saritathummar.ce@charusat.ac.in' },
-    { img: '/img/certifications/aws.png',    name: 'AWS Academy',      contact: 'Prof. Sanket Suthar',   email: 'sanketsuthar.it@charusat.ac.in' },
+    { img: '/img/certifications/aws.png',    name: 'AWS Academy',      contact: 'Prof. Ravi Patel',      email: '' },
     { img: '/img/certifications/cisco.png',  name: 'Cisco Networking Academy', contact: 'Prof. Abhishek Patel', email: 'abhishekpatel.cse@charusat.ac.in' },
     { img: '/img/certifications/oracle.png', name: 'Oracle Academy',   contact: 'Prof. Vidisha Pradhan', email: 'vidishapradhan.cse@charusat.ac.in' },
 ];
 
 export default function Certifications() {
     return (
-        <section id="services" className="wow fadeInUp" style={{ background: 'var(--bg)', padding: '90px 0' }}>
+        <section id="services" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0' }}>
             <div className="container">
                 {/* Badge */}
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -30,22 +30,24 @@ export default function Certifications() {
                     {certs.map((c, i) => (
                         <div key={i} className="col-lg-6" style={{ marginBottom: '20px' }}>
                             <div className="ref-card" style={{ padding: '28px 28px', display: 'flex', alignItems: 'center', gap: '24px' }}
-                                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(34,211,238,.22)'; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = '0 16px 48px rgba(0,0,0,.5)'; }}
-                                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = 'none'; }}
+                                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(12, 46, 138, 0.15)'; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = '0 10px 40px rgba(15,23,42,0.1)'; }}
+                                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = 'var(--shadow-sm)'; }}
                             >
                                 {/* Logo box */}
-                                <div style={{ width: '120px', minWidth: '120px', height: '80px', background: '#fff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
+                                <div style={{ width: '120px', minWidth: '120px', height: '80px', background: '#f8fafc', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', border: '1px solid rgba(15, 23, 42, 0.06)' }}>
                                     <img src={c.img} alt={c.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
                                 </div>
                                 {/* Text */}
                                 <div>
-                                    <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '17px', color: '#f1f5f9', marginBottom: '6px' }}>{c.name}</h4>
-                                    <div style={{ fontSize: '11px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Course Coordinator</div>
-                                    <div style={{ fontWeight: 600, fontSize: '14px', color: '#f1f5f9', marginBottom: '6px' }}>{c.contact}</div>
-                                    <a href={`mailto:${c.email}`} style={{ color: 'var(--cyan)', fontSize: '13px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                        <i className="fa fa-envelope" style={{ fontSize: '12px' }} />
-                                        {c.email}
-                                    </a>
+                                    <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '17px', color: '#0f172a', marginBottom: '6px' }}>{c.name}</h4>
+                                    <div style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Course Coordinator</div>
+                                    <div style={{ fontWeight: 600, fontSize: '14px', color: '#334155', marginBottom: c.email ? '6px' : '0' }}>{c.contact}</div>
+                                    {c.email ? (
+                                        <a href={`mailto:${c.email}`} style={{ color: 'var(--primary)', fontSize: '13px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <i className="fa fa-envelope" style={{ fontSize: '12px' }} />
+                                            {c.email}
+                                        </a>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>

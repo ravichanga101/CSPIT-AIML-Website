@@ -8,6 +8,24 @@ export default function StudentAchievementsAll() {
     const achievements = [
         {
             category: 'competition',
+            img: '/img/students/student20.jpg',
+            onError: '/img/photos/1.jpg',
+            title: 'AIML Students — MathFlow AI',
+            course: 'B.Tech AI-ML',
+            description: 'Strong fundamentals are the backbone of effective Artificial Intelligence education. At the Department of AIML, CSPIT, our students demonstrated this clearly through their performance at the MathFlow AI, conducted by the Math for AI Club. This initiative bridges the gap between mathematical thinking and practical AI applications, encouraging students to strengthen their foundational skills while exploring creative problem-solving approaches.',
+            tag: 'MathFlow AI'
+        },
+        {
+            category: 'competition',
+            img: '/img/students/student21.jpg',
+            onError: '/img/photos/2.jpg',
+            title: 'India AI Summit 2026 — Top 2% Finalists',
+            course: 'India AI Summit 2026',
+            description: 'Rising as Top 2% Finalists at India AI Summit 2026, Bharat Mandapam, New Delhi, our young achievers have made a remarkable mark among thousands of participants across the country. Competing at one of India\'s most prestigious AI platforms, this milestone reflects the culture of excellence, research-driven learning, and forward-thinking mentorship that defines CHARUSAT. A proud achievement that showcases how innovation and dedication turn ideas into national recognition.',
+            tag: 'Top 2% Finalists'
+        },
+        {
+            category: 'competition',
             img: '/img/students/student7.jpg',
             onError: '/img/photos/1.jpg',
             title: 'Tirth, Manan & Nil',
@@ -357,7 +375,7 @@ export default function StudentAchievementsAll() {
                         <div className="row">
                             <div className="col-lg-3 col-md-6">
                                 <div className="stat-item">
-                                    <div className="stat-number">18</div>
+                                    <div className="stat-number">20</div>
                                     <div className="stat-label">Awards Won</div>
                                 </div>
                             </div>

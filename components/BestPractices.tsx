@@ -19,16 +19,16 @@ const practices = [
 ];
 
 const iconColors = [
-    { bg: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.3)', color: '#22d3ee' },
-    { bg: 'rgba(139,92,246,0.12)', border: 'rgba(139,92,246,0.3)', color: '#a78bfa' },
-    { bg: 'rgba(234,179,8,0.12)', border: 'rgba(234,179,8,0.3)', color: '#fbbf24' },
-    { bg: 'rgba(45,212,191,0.12)', border: 'rgba(45,212,191,0.3)', color: '#2dd4bf' },
-    { bg: 'rgba(99,102,241,0.12)', border: 'rgba(99,102,241,0.3)', color: '#818cf8' },
+    { bg: 'rgba(12, 46, 138, 0.06)', border: 'rgba(12, 46, 138, 0.12)', color: '#0c2e8a' },
+    { bg: 'rgba(109, 40, 217, 0.06)', border: 'rgba(109, 40, 217, 0.12)', color: '#6d28d9' },
+    { bg: 'rgba(217, 119, 6, 0.06)', border: 'rgba(217, 119, 6, 0.12)', color: '#d97706' },
+    { bg: 'rgba(5, 150, 105, 0.06)', border: 'rgba(5, 150, 105, 0.12)', color: '#059669' },
+    { bg: 'rgba(37, 99, 235, 0.06)', border: 'rgba(37, 99, 235, 0.12)', color: '#2563eb' },
 ];
 
 export default function BestPractices() {
     return (
-        <section id="services" className="wow fadeInUp" style={{ background: 'var(--bg)', padding: '90px 0' }}>
+        <section id="services" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                     <span className="ref-badge"><i className="fa fa-star" />Academic Distinction</span>
@@ -41,13 +41,14 @@ export default function BestPractices() {
                         return (
                             <div key={i} className="col-lg-6 col-md-6" style={{ marginBottom: '12px' }}>
                                 <div style={{
-                                    background: 'var(--bg-card)', border: '1px solid var(--border)',
+                                    background: '#ffffff', border: '1px solid rgba(15, 23, 42, 0.06)',
                                     borderRadius: '12px', padding: '16px 20px',
                                     display: 'flex', alignItems: 'center', gap: '16px',
                                     transition: 'all 0.3s ease', cursor: 'default',
+                                    boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)',
                                 }}
-                                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = c.border; el.style.transform = 'translateX(5px)'; el.style.boxShadow = '0 4px 20px rgba(0,0,0,.3)'; }}
-                                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateX(0)'; el.style.boxShadow = 'none'; }}
+                                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = c.border; el.style.transform = 'translateX(5px)'; el.style.boxShadow = '0 4px 16px rgba(15,23,42,0.08)'; }}
+                                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(15, 23, 42, 0.06)'; el.style.transform = 'translateX(0)'; el.style.boxShadow = '0 1px 3px rgba(15, 23, 42, 0.04)'; }}
                                 >
                                     <div style={{
                                         width: '40px', height: '40px', minWidth: '40px',
@@ -57,7 +58,7 @@ export default function BestPractices() {
                                     }}>
                                         <i className={`fa ${item.icon}`} style={{ color: c.color, fontSize: '16px' }} />
                                     </div>
-                                    <span style={{ color: '#f0f6fc', fontWeight: 500, fontSize: '14px', lineHeight: 1.5 }}>
+                                    <span style={{ color: '#1e293b', fontWeight: 500, fontSize: '14px', lineHeight: 1.5 }}>
                                         {item.title}
                                     </span>
                                 </div>

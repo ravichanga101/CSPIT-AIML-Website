@@ -1,2 +1,15 @@
-/* Global Styles are handled via public/css/style.css */
-/* We can add Next.js specific globals here if needed */
+/* Global Styles are handled via public/css/style.css & public/css/design.css */
+/* Enforce CHARUSAT light theme — prevent dark mode from OS/browser */
+
+html {
+  color-scheme: light only;
+}
+
+/* Ensure images and media retain their original appearance */
+img,
+video,
+canvas,
+picture,
+svg {
+  filter: none !important;
+}

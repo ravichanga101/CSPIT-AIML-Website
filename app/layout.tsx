@@ -4,6 +4,7 @@ import { config } from '@/lib/config';
 import MainMenu from '@/components/MainMenu';
 import Footer from '@/components/Footer';
 import DynamicBackground from '@/components/DynamicBackground';
+import ScrollAnimator from '@/components/ScrollAnimator';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-dark-surface">
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <MainMenu />
         {children}
         <Footer />
+        <ScrollAnimator />
 
         {/* Scripts from php include/footer.php */}
         {/* Using beforeInteractive for jQuery as it might be needed early? No, PHP puts them in footer. 

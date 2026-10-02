@@ -3,7 +3,61 @@ import { useState } from 'react';
 
 const facultyAchievements = [
     {
-        img: '/img/faculty/best-paper-award.jpg',
+        img: '/img/faculty/6.png',
+        imgPos: 'top center',
+        highlight: 'Award for Exemplary Dedication — CHARUSAT 26th Foundation Day',
+        names: 'Dr. Nirav Bhatt',
+        paper: 'Head of Department, CHARUSAT — Department of AIML (Artificial Intelligence and Machine Learning)',
+        badge: 'Exemplary Dedication',
+        badgeColor: '#f472b6',
+        description: [
+            'Heartiest congratulations to Dr. Nirav Bhatt, Head of the Department, CHARUSAT — Department of AIML on receiving the "Award for Exemplary Dedication" on the occasion of the 26th Foundation Day of CHARUSAT.',
+            'This distinguished recognition reflects his sustained commitment to academic excellence, effective leadership, and the advancement of outcome-driven education, research, and innovation within the AIML domain.',
+            'His contributions continue to inspire both faculty members and students toward professional excellence and societal impact.',
+        ],
+        links: {
+            'Dr. Nirav Bhatt': 'https://www.linkedin.com/in/dr-nirav-bhatt/',
+            'CHARUSAT - Department of AIML': 'https://www.linkedin.com/in/aimlcspit/',
+        },
+    },
+    {
+        img: '/img/faculty/5.png',
+        imgPos: 'top center',
+        highlight: 'Research Paper Award — CHARUSAT 26th Foundation Day',
+        names: 'Jalpesh Vasa',
+        paper: 'Honored with the Research Paper Award on the proud occasion of the 26th Foundation Day of CHARUSAT',
+        badge: 'Research Paper Award',
+        badgeColor: '#a78bfa',
+        description: [
+            'We are pleased to announce that Jalpesh Vasa has been honored with the Research Paper Award on the proud occasion of the 26th Foundation Day of CHARUSAT.',
+            'This achievement recognizes his sincere involvement in research activities, systematic approach to problem-solving, and consistent efforts toward producing impactful scholarly work. His contribution reflects a strong dedication to exploring emerging ideas and strengthening the research culture within the academic community.',
+            'Such recognition highlights the importance of perseverance, intellectual curiosity, and commitment to excellence. We extend our best wishes to him for continued growth and success in future research endeavors.',
+            'We also acknowledge and appreciate the continuous support and encouragement from the university leadership and administration in promoting a vibrant and innovation-driven academic environment.',
+        ],
+        links: {
+            'Jalpesh Vasa': 'https://www.linkedin.com/in/jalpesh-vasa/',
+        },
+    },
+    {
+        img: '/img/faculty/4.png',
+        imgPos: 'top center',
+        highlight: 'Book Chapter Published — CRC Press',
+        names: 'Gaurang Patel',
+        paper: '"ANN Applications in Polymer Tribology" — in Sustainable Smart Composites: Technology and Applications (CRC Press)',
+        badge: 'Book Chapter',
+        badgeColor: '#4ade80',
+        description: [
+            'Our esteemed faculty member Gaurang Patel has successfully published a book chapter titled "ANN Applications in Polymer Tribology" in the CRC Press book "Sustainable Smart Composites: Technology and Applications."',
+            'The chapter explains how artificial neural networks can be used to study and predict friction and wear behavior in polymers, highlighting the growing importance of AI in solving engineering problems.',
+            'This publication reflects the dedication, expertise, and strong research focus of our department, where innovative ideas are continuously developed into meaningful and practical contributions. It also strengthens our commitment to advancing knowledge that benefits both academic and industry.',
+        ],
+        links: {
+            'Gaurang Patel': 'https://cspit.charusat.ac.in/faculty/Mr.%20Gaurang%20Patel',
+        },
+    },
+    {
+        img: '/img/faculty/7.png',
+        imgPos: 'bottom center',
         highlight: 'Best Paper Award — ICRAIC 2026',
         names: 'Dr. Nirav Bhatt & Dr. Jalpesh Vasa',
         paper: '"Beyond Generic AI: RAG-Powered Question Answering for Specialized Knowledge Domains"',
@@ -22,6 +76,7 @@ const facultyAchievements = [
     },
     {
         img: '/img/faculty/1.png',
+        imgPos: 'top center',
         highlight: 'GUJCOST Approval — Generative AI Workshop',
         names: 'Dr. Nirav Bhatt',
         paper: '"Generative AI: Foundations, Tools and Hands-on Applications" — National Level Workshop',
@@ -38,6 +93,7 @@ const facultyAchievements = [
     },
     {
         img: '/img/faculty/2.png',
+        imgPos: 'top center',
         highlight: 'GUJCOST Approval — Web 3.0 & DApps Workshop',
         names: 'Dr. Hardik Jayswal',
         paper: '"Web 3.0 and Decentralized Applications (DApps): Concepts, Tools and Hands-on Development" — National Level Workshop',
@@ -54,6 +110,7 @@ const facultyAchievements = [
     },
     {
         img: '/img/faculty/3.png',
+        imgPos: 'center',
         highlight: 'Session Chair — International Conference, Manila, Philippines',
         names: 'Dr. Nirav H. Bhatt',
         paper: 'International Conference on Machine and Computing Technologies for Sustainable Development — Manila, Philippines',
@@ -74,7 +131,7 @@ export default function FacultyAchievements() {
     const [expanded, setExpanded] = useState<number | null>(null);
 
     return (
-        <section className="wow fadeInUp" style={{ background: 'var(--bg)', padding: '60px 0 0' }}>
+        <section className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '60px 0 0' }}>
             <div className="container">
 
                 {/* Section badge */}
@@ -96,16 +153,16 @@ export default function FacultyAchievements() {
                                         cursor: 'pointer',
                                         transition: 'all 0.35s ease',
                                         height: '100%',
-                                        borderColor: isOpen ? item.badgeColor + '55' : 'var(--border)',
-                                        boxShadow: isOpen ? `0 20px 60px rgba(0,0,0,0.5), 0 0 30px ${item.badgeColor}18` : 'none',
+                                        borderColor: isOpen ? item.badgeColor + '33' : 'var(--border)',
+                                        boxShadow: isOpen ? `0 16px 48px rgba(15,23,42,0.12), 0 0 0 1px ${item.badgeColor}15` : 'var(--shadow-sm)',
                                     }}
                                     onClick={() => setExpanded(isOpen ? null : i)}
                                     onMouseEnter={e => {
                                         if (!isOpen) {
                                             const el = e.currentTarget as HTMLElement;
-                                            el.style.borderColor = item.badgeColor + '44';
+                                            el.style.borderColor = item.badgeColor + '22';
                                             el.style.transform = 'translateY(-4px)';
-                                            el.style.boxShadow = '0 16px 40px rgba(0,0,0,.4)';
+                                            el.style.boxShadow = '0 12px 40px rgba(15,23,42,0.1)';
                                         }
                                     }}
                                     onMouseLeave={e => {
@@ -113,27 +170,27 @@ export default function FacultyAchievements() {
                                             const el = e.currentTarget as HTMLElement;
                                             el.style.borderColor = 'var(--border)';
                                             el.style.transform = 'translateY(0)';
-                                            el.style.boxShadow = 'none';
+                                            el.style.boxShadow = 'var(--shadow-sm)';
                                         }
                                     }}
                                 >
                                     {/* Image — top, full width */}
-                                    <div style={{ height: '200px', overflow: 'hidden', position: 'relative', borderRadius: '12px 12px 0 0' }}>
+                                    <div style={{ height: '280px', overflow: 'hidden', position: 'relative', borderRadius: '12px 12px 0 0', background: '#f1f5f9' }}>
                                         <img
                                             src={item.img}
                                             alt={item.names}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.imgPos ?? 'center', transition: 'transform 0.4s ease' }}
                                             onError={e => (e.currentTarget.style.display = 'none')}
                                         />
                                         {/* Badge overlay */}
                                         <div style={{
                                             position: 'absolute', top: '12px', left: '12px',
-                                            background: item.badgeColor, color: '#08090e',
+                                            background: item.badgeColor, color: '#ffffff',
                                             padding: '3px 12px', borderRadius: '9999px',
                                             fontSize: '11px', fontWeight: 800,
                                         }}>{item.badge}</div>
                                         {/* Dark gradient at bottom */}
-                                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(8,9,14,0.7) 100%)' }} />
+                                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(255,255,255,0.85) 100%)' }} />
                                     </div>
 
                                     {/* Highlight strip below image */}
@@ -141,22 +198,22 @@ export default function FacultyAchievements() {
                                         <div style={{ color: item.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>
                                             <i className="fa fa-trophy" style={{ marginRight: '6px' }} />{item.highlight}
                                         </div>
-                                            <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 800, fontSize: '18px', color: '#f1f5f9', margin: 0, lineHeight: 1.3 }}>
-                                                {item.names}
-                                            </h4>
-                                            <p style={{ color: 'var(--muted)', fontSize: '13px', margin: 0, fontStyle: 'italic', lineHeight: 1.5 }}>
-                                                {item.paper}
-                                            </p>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                                                <span style={{
-                                                    fontSize: '12px', color: '#22d3ee', fontWeight: 600,
-                                                    display: 'flex', alignItems: 'center', gap: '5px',
-                                                }}>
-                                                    <i className={`fa ${isOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`} style={{ fontSize: '10px' }} />
-                                                    {isOpen ? 'Show Less' : 'Read Full Story'}
-                                                </span>
-                                            </div>
+                                        <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 800, fontSize: '18px', color: '#0f172a', margin: 0, lineHeight: 1.3 }}>
+                                            {item.names}
+                                        </h4>
+                                        <p style={{ color: '#64748b', fontSize: '13px', margin: 0, fontStyle: 'italic', lineHeight: 1.5 }}>
+                                            {item.paper}
+                                        </p>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+                                            <span style={{
+                                                fontSize: '12px', color: '#0c2e8a', fontWeight: 600,
+                                                display: 'flex', alignItems: 'center', gap: '5px',
+                                            }}>
+                                                <i className={`fa ${isOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`} style={{ fontSize: '10px' }} />
+                                                {isOpen ? 'Show Less' : 'Read Full Story'}
+                                            </span>
                                         </div>
+                                    </div>
 
                                     {/* Expandable full description */}
                                     <div style={{
@@ -172,7 +229,7 @@ export default function FacultyAchievements() {
                                         }}>
                                             {item.description.map((para, pi) => (
                                                 <p key={pi} style={{
-                                                    color: pi === 0 ? 'var(--muted)' : '#cbd5e1',
+                                                    color: pi === 0 ? '#64748b' : '#475569',
                                                     fontSize: '14px', lineHeight: 1.85,
                                                     marginBottom: pi < item.description.length - 1 ? '14px' : 0,
                                                 }}
@@ -180,7 +237,7 @@ export default function FacultyAchievements() {
                                                         __html: Object.entries(item.links).reduce(
                                                             (text, [name, url]) => text.replace(
                                                                 new RegExp(name, 'g'),
-                                                                `<a href="${url}" target="_blank" style="color:#22d3ee;text-decoration:none;font-weight:700;">${name}</a>`
+                                                                `<a href="${url}" target="_blank" style="color:#0c2e8a;text-decoration:none;font-weight:700;">${name}</a>`
                                                             ),
                                                             para
                                                         )
@@ -195,17 +252,17 @@ export default function FacultyAchievements() {
                                                         onClick={e => e.stopPropagation()}
                                                         style={{
                                                             display: 'inline-flex', alignItems: 'center', gap: '7px',
-                                                            background: 'rgba(34,211,238,0.08)',
-                                                            border: '1px solid rgba(34,211,238,0.25)',
-                                                            color: '#22d3ee', fontSize: '12px', fontWeight: 600,
+                                                            background: 'rgba(12,46,138,0.06)',
+                                                            border: '1px solid rgba(12,46,138,0.15)',
+                                                            color: '#0c2e8a', fontSize: '12px', fontWeight: 600,
                                                             padding: '7px 16px', borderRadius: '9999px',
                                                             textDecoration: 'none', transition: 'all 0.2s ease',
                                                         }}
                                                         onMouseEnter={e => {
-                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(34,211,238,0.18)';
+                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(12,46,138,0.12)';
                                                         }}
                                                         onMouseLeave={e => {
-                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(34,211,238,0.08)';
+                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(12,46,138,0.06)';
                                                         }}
                                                     >
                                                         <i className="fa fa-linkedin" /> {name}

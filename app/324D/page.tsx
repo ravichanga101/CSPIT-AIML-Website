@@ -1,49 +1,47 @@
+import LabDetailView from '@/components/LabDetailView';
+
 export default function Lab324D() {
     return (
-        <section id="services" className="wow fadeInUp">
-            <div className="container">
-                <div className="section-header">
-                    <h2></h2><h2 style={{ paddingTop: '20px' }}>Advanced Computing Lab</h2><br />
-                </div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><h3>LAB NO</h3></td>
-                            <td><h3>LAB NAME</h3></td>
-                            <td><h3>PURCHASE YEAR</h3></td>
-                            <td><h3>PARTICULAR</h3></td>
-                            <td><h3>QTY</h3></td>
-                        </tr>
-                        <tr>
-                            <td rowSpan={4}>324-A</td>
-                            <td rowSpan={4}>AI & ML Lab - 02</td>
-                            <td rowSpan={4}>2024</td>
-                            <td>HP ProOne 440 23.8 inch G9 All-in-One Desktop PC,13th Gen Intel(R) Core(TM) i7-13700, 2100Mhz, 16 Core(s), 24 Logical Processor(s),16 GB DDR-5, 1 TB NVME SSD, HP OPTICAL MOUSE & KEYBOARD</td>
-                            <td>40</td>
-                        </tr>
-                        <tr>
-                            <td>ViewSonic Interactive Flat Panel Model IFP 8652-1B with OPS PC and Presentoo Stand</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Sarthi DLC (Stabilizer) DPC 0.5 KVA DPC</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Cisco - C9200L-24T-4G Network Switch</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                        </tr>
-                        <tr> </tr>
-                        <tr> </tr>
-                        <tr> </tr>
-                        <tr> </tr>
-                        <tr> </tr>
-                    </tbody>
-                </table>
-                <br /><br /><br /><br /><br />
-            </div>
-        </section>
+        <LabDetailView
+            number="324-D"
+            title="Advanced Computing Lab"
+            officialName="AI & ML Lab - 02"
+            subtitle="Department of Artificial Intelligence & Machine Learning · CSPIT"
+            totalPCs={40}
+            equipment={[
+                {
+                    name: "HP ProOne 440 23.8 inch G9 All-in-One Desktop PC",
+                    specs: "13th Gen Intel(R) Core(TM) i7-13700, 2100Mhz, 16 Core(s), 24 Logical Processor(s), 16 GB DDR-5, 1 TB NVME SSD, HP OPTICAL MOUSE & KEYBOARD",
+                    year: "2024",
+                    qty: 40,
+                    type: "All-in-One Workstation",
+                    icon: "fa-desktop"
+                },
+                {
+                    name: "ViewSonic Interactive Flat Panel Model IFP 8652-1B",
+                    specs: "Equipped with OPS PC and Presentoo Stand for interactive digital classroom sessions",
+                    year: "2024",
+                    qty: 1,
+                    type: "Interactive Flat Panel",
+                    icon: "fa-tv"
+                },
+                {
+                    name: "Sarthi DLC (Stabilizer) DPC 0.5 KVA DPC",
+                    specs: "Power conditioning & line stabilization unit",
+                    year: "2024",
+                    qty: 1,
+                    type: "Stabilizer",
+                    icon: "fa-bolt"
+                },
+                {
+                    name: "Cisco - C9200L-24T-4G Network Switch",
+                    specs: "High throughput enterprise 24-port Gigabit Ethernet switch",
+                    year: "2024",
+                    qty: 2,
+                    type: "Network Switch",
+                    icon: "fa-sitemap"
+                }
+            ]}
+        />
     );
 }
