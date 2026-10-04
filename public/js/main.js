@@ -15,8 +15,10 @@ jQuery(document).ready(function( $ ) {
     return false;
   });
 
-  // Stick the header at top on scroll
-  $("#header").sticky({topSpacing:10, zIndex: '9999'});
+  // Stick the header at top on scroll (only if not a floating pill)
+  if (!$("#header").hasClass('header-floating-pill')) {
+    $("#header").sticky({topSpacing:10, zIndex: '9999'});
+  }
 
   // Keep navbar floating with gap on scroll
   $(window).scroll(function() {
@@ -39,13 +41,15 @@ jQuery(document).ready(function( $ ) {
   // Initiate the wowjs animation library
   new WOW().init();
 
-  // Initiate superfish on nav menu
-  $('.nav-menu').superfish({
-    animation: {
-      opacity: 'show'
-    },
-    speed: 400
-  });
+  // Initiate superfish only on legacy header (floating pill navbar uses pure instantaneous CSS with zero blink)
+  if (!$("#header").hasClass('header-floating-pill')) {
+    $('.nav-menu').superfish({
+      animation: {
+        opacity: 'show'
+      },
+      speed: 400
+    });
+  }
 
   // Mobile Navigation
   if ($('#nav-menu-container').length) {
@@ -92,14 +96,17 @@ jQuery(document).ready(function( $ ) {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
       if (target.length) {
-        var top_space = 0;
+        var top_space = 92;
 
-        if ($('#header').length) {
-          top_space = $('#header').outerHeight();
-
-          if( ! $('#header').hasClass('header-fixed') ) {
-            top_space = top_space - 20;
+        if (target.is('#vision') || target.is('#mission') || target.is('#vision-mission')) {
+          var sectionTarget = $('#vision-mission');
+          if (!sectionTarget.length) {
+            sectionTarget = target.closest('section');
           }
+          if (sectionTarget.length) {
+            target = sectionTarget;
+          }
+          top_space = 85;
         }
 
         $('html, body').animate({
@@ -108,7 +115,10 @@ jQuery(document).ready(function( $ ) {
 
         if ($(this).parents('.nav-menu').length) {
           $('.nav-menu .menu-active').removeClass('menu-active');
-          $(this).closest('li').addClass('menu-active');
+          var parentLi = $(this).closest('.nav-menu > li');
+          if (parentLi.length) {
+            parentLi.addClass('menu-active');
+          }
         }
 
         if ($('body').hasClass('mobile-nav-active')) {
@@ -128,7 +138,8 @@ jQuery(document).ready(function( $ ) {
     removalDelay: 300,
     mainClass: 'mfp-fade',
     gallery: {
-      enabled: true
+      enabled: true,
+      tCounter: '%curr% / %total%'
     },
     zoom: {
       enabled: true,

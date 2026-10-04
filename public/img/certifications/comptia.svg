@@ -1,0 +1,27 @@
+<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <!-- White Background -->
+  <rect width="360" height="140" fill="#ffffff"/>
+
+  <!-- CompTIA in Red italic -->
+  <g transform="translate(14, 25)">
+    <text x="0" y="42" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="900" font-style="italic" font-size="44" fill="#D32F2F" letter-spacing="-1">
+      CompTIA<tspan font-style="normal" font-size="20">®</tspan>
+    </text>
+    <text x="2" y="70" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="20" fill="#1E293B" letter-spacing="0.3">
+      Authorized Partner
+    </text>
+  </g>
+
+  <!-- Vertical Divider Line -->
+  <line x1="240" y1="30" x2="240" y2="108" stroke="#94A3B8" stroke-width="1.8"/>
+
+  <!-- ACADEMIC PARTNER in right block -->
+  <g transform="translate(254, 25)">
+    <text x="0" y="40" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="20" fill="#475569" letter-spacing="0.8">
+      ACADEMIC
+    </text>
+    <text x="0" y="66" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="20" fill="#475569" letter-spacing="0.8">
+      PARTNER
+    </text>
+  </g>
+</svg>

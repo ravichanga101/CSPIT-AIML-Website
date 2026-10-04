@@ -20,9 +20,6 @@ export default function Gallery({ images }: GalleryProps) {
                 <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
                     Department <span className="grad-violet">Gallery</span>
                 </h2>
-                <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', marginBottom: '50px' }}>
-                    Glimpses of life, learning, and achievements at CSPIT AI-ML
-                </p>
 
                 <div className="row" style={{ margin: '0 -8px' }}>
                     {visible.map((src, i) => (

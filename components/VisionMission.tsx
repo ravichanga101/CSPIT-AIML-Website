@@ -3,7 +3,7 @@ import { config } from '@/lib/config';
 
 export default function VisionMission() {
     return (
-        <section id="services" className="v_m wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0' }}>
+        <section id="vision-mission" className="v_m wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0', scrollMarginTop: '85px' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                     <span className="ref-badge"><i className="fa fa-compass" />Our Foundation</span>
@@ -12,7 +12,7 @@ export default function VisionMission() {
 
                 <div className="row" style={{ justifyContent: 'center', gap: '0' }}>
                     {/* Vision */}
-                    <div className="col-lg-5 col-md-12" id="vision" style={{ marginBottom: '20px' }}>
+                    <div className="col-lg-5 col-md-12" id="vision" style={{ marginBottom: '20px', scrollMarginTop: '260px' }}>
                         <div style={{
                             background: '#ffffff', border: '1px solid rgba(12, 46, 138, 0.1)',
                             borderRadius: '16px', padding: '36px 32px', height: '100%',
@@ -40,7 +40,7 @@ export default function VisionMission() {
                     </div>
 
                     {/* Mission */}
-                    <div className="col-lg-5 col-md-12" id="mission" style={{ marginBottom: '20px' }}>
+                    <div className="col-lg-5 col-md-12" id="mission" style={{ marginBottom: '20px', scrollMarginTop: '260px' }}>
                         <div style={{
                             background: '#ffffff', border: '1px solid rgba(5, 150, 105, 0.1)',
                             borderRadius: '16px', padding: '36px 32px', height: '100%',

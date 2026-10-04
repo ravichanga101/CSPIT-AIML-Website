@@ -6,11 +6,12 @@ import Certifications from '@/components/Certifications';
 import StudentChapter from '@/components/StudentChapter';
 import MajorRecruiters from '@/components/MajorRecruiters';
 import CareerDevelopment from '@/components/CareerDevelopment';
-import Testimonials from '@/components/Testimonials';
 import StudentClubs from '@/components/StudentClubs';
 import StudentAchievements from '@/components/StudentAchievements';
 import FacultyAchievements from '@/components/FacultyAchievements';
 import Gallery from '@/components/Gallery';
+import Testimonials from '@/components/Testimonials';
+import LeadershipMessages from '@/components/LeadershipMessages';
 import ContactUs from '@/components/ContactUs';
 import { getImagesFromFolder } from '@/lib/getImages';
 
@@ -30,11 +31,12 @@ export default function Home() {
       <StudentChapter />
       <MajorRecruiters />
       <CareerDevelopment />
-      <Testimonials />
       <StudentClubs />
       <FacultyAchievements />
       <StudentAchievements />
       <Gallery images={photos} />
+      <Testimonials />
+      <LeadershipMessages />
       <ContactUs />
     </>
   );

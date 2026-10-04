@@ -2,10 +2,81 @@
 
 import { config, links } from '@/lib/config';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function MainMenu() {
+    const pathname = usePathname();
+    const isHome = pathname === '/';
     const [activeModal, setActiveModal] = useState<'peos' | 'pos' | 'psos' | null>(null);
+    const [isPastSlider, setIsPastSlider] = useState(false);
+    const [activeNav, setActiveNav] = useState<'home' | 'about' | 'services' | 'labs'>(() => {
+        if (!isHome) {
+            if (pathname?.startsWith('/32')) return 'labs';
+            return 'services';
+        }
+        return 'home';
+    });
+
+    // Check hash on mount or pathname change
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const hash = window.location.hash;
+            if (hash === '#about_us' || hash === '#vision' || hash === '#mission' || hash === '#peos' || hash === '#pos' || hash === '#psos') {
+                setActiveNav('about');
+            } else if (hash === '#student-achievements' || hash === '#student-clubs') {
+                setActiveNav('services');
+            }
+        }
+    }, [pathname]);
+
+    // Track scroll to detect when the home slider has passed AND update activeNav via scroll-spy
+    useEffect(() => {
+        const handleScroll = () => {
+            const intro = document.getElementById('intro');
+            if (intro) {
+                const rect = intro.getBoundingClientRect();
+                // When bottom of intro slider is near or above the navbar (<= 90px), switch to light theme
+                setIsPastSlider(rect.bottom <= 90);
+            } else {
+                // Pages without hero slider use light theme
+                setIsPastSlider(true);
+            }
+
+            // Scroll-spy on home page
+            if (isHome) {
+                const scrollY = window.scrollY;
+                const introBottom = intro ? intro.getBoundingClientRect().bottom : 0;
+
+                // When user is viewing the hero/slider section
+                if (scrollY < 200 || introBottom > 150) {
+                    setActiveNav('home');
+                } else {
+                    const servicesEl = document.getElementById('student-achievements') || document.getElementById('student-chapter') || document.getElementById('student-clubs');
+                    const aboutEl = document.getElementById('about_us') || document.getElementById('services');
+
+                    const servicesTop = servicesEl ? servicesEl.getBoundingClientRect().top : 99999;
+                    const aboutTop = aboutEl ? aboutEl.getBoundingClientRect().top : 99999;
+
+                    if (servicesTop <= 200) {
+                        setActiveNav('services');
+                    } else if (aboutTop <= 350) {
+                        setActiveNav('about');
+                    } else {
+                        setActiveNav('home');
+                    }
+                }
+            }
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, [pathname, isHome]);
 
     // Close on Escape key press & prevent background scroll
     useEffect(() => {
@@ -35,14 +106,17 @@ export default function MainMenu() {
             if (href.endsWith('#peos') || href === '#peos') {
                 e.preventDefault();
                 setActiveModal('peos');
+                setActiveNav('about');
                 document.body.classList.remove('mobile-nav-active');
             } else if (href.endsWith('#pos') || href === '#pos') {
                 e.preventDefault();
                 setActiveModal('pos');
+                setActiveNav('about');
                 document.body.classList.remove('mobile-nav-active');
             } else if (href.endsWith('#psos') || href === '#psos') {
                 e.preventDefault();
                 setActiveModal('psos');
+                setActiveNav('about');
                 document.body.classList.remove('mobile-nav-active');
             }
         };
@@ -52,56 +126,100 @@ export default function MainMenu() {
 
     return (
         <>
-            {/* Header */}
-            <header id="header">
-                <div className="container">
+            {/* Header: Floating Frosted Glass Navbar */}
+            <header 
+                id="header" 
+                className={`header-floating-pill ${isPastSlider ? 'header-theme-light' : 'header-theme-dark'}`}
+            >
+                <div className="container header-pill-container">
                     <div id="logo">
                         <Link href="/" className="scrollto" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
                             {/* Department Logo */}
                             <img
                                 src="/img/logo/aiml-logo.jpg"
                                 alt="AIML Department Logo"
-                                style={{
-                                    width: '44px',
-                                    height: '44px',
-                                    borderRadius: '50%',
-                                    objectFit: 'cover',
-                                    flexShrink: 0,
-                                    border: '2px solid #E5E7EB',
-                                }}
+                                className="nav-dept-logo"
                             />
                             <span style={{ lineHeight: 1.25 }}>
-                                <span style={{
-                                    display: 'block',
-                                    fontSize: '11px',
-                                    color: '#2563EB',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1.5px',
-                                    fontWeight: 700,
-                                    fontFamily: 'var(--font-b)',
-                                }}>CSPIT</span>
-                                <span style={{
-                                    display: 'block',
-                                    fontSize: '15px',
-                                    color: '#1E3A5F',
-                                    fontFamily: 'var(--font-h)',
-                                    fontWeight: 700,
-                                    whiteSpace: 'nowrap',
-                                }}>{config.name_of_dept}</span>
+                                <span className="nav-logo-sub">CSPIT</span>
+                                <span className="nav-logo-main">{config.name_of_dept}</span>
                             </span>
                         </Link>
                     </div>
                     <nav id="nav-menu-container">
                         <ul className="nav-menu">
-                            <li><Link href="/">Home</Link></li>
-                            <li className="menu-has-children"><Link href="/#about_us">About</Link>
+                            <li className={activeNav === 'home' ? "menu-active" : ""}>
+                                <Link 
+                                    href="/" 
+                                    onClick={(e) => { 
+                                        setActiveNav('home'); 
+                                        if (isHome) {
+                                            e.preventDefault();
+                                            window.history.pushState(null, '', '/');
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }
+                                    }}
+                                >
+                                    <span>Home</span>
+                                    <span className="nav-item-indicator" />
+                                </Link>
+                            </li>
+                            <li className={`menu-has-children ${activeNav === 'about' ? "menu-active" : ""}`}>
+                                <Link 
+                                    href="/#about_us" 
+                                    onClick={(e) => { 
+                                        setActiveNav('about'); 
+                                        const el = document.getElementById('about_us');
+                                        if (el) {
+                                            e.preventDefault();
+                                            window.history.pushState(null, '', '#about_us');
+                                            const y = el.getBoundingClientRect().top + window.scrollY - 85;
+                                            window.scrollTo({ top: y, behavior: 'smooth' });
+                                        }
+                                    }}
+                                >
+                                    <span>About</span>
+                                    <span className="nav-item-indicator" />
+                                </Link>
                                 <ul>
-                                    <li><Link href="/#vision">Vision</Link></li>
-                                    <li><Link href="/#mission">Mission</Link></li>
+                                    <li>
+                                        <Link 
+                                            href="/#vision-mission" 
+                                            onClick={(e) => { 
+                                                setActiveNav('about'); 
+                                                const el = document.getElementById('vision-mission');
+                                                if (el) {
+                                                    e.preventDefault();
+                                                    window.history.pushState(null, '', '#vision');
+                                                    const y = el.getBoundingClientRect().top + window.scrollY - 85;
+                                                    window.scrollTo({ top: y, behavior: 'smooth' });
+                                                }
+                                            }}
+                                        >
+                                            Vision
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            href="/#vision-mission" 
+                                            onClick={(e) => { 
+                                                setActiveNav('about'); 
+                                                const el = document.getElementById('vision-mission');
+                                                if (el) {
+                                                    e.preventDefault();
+                                                    window.history.pushState(null, '', '#mission');
+                                                    const y = el.getBoundingClientRect().top + window.scrollY - 85;
+                                                    window.scrollTo({ top: y, behavior: 'smooth' });
+                                                }
+                                            }}
+                                        >
+                                            Mission
+                                        </Link>
+                                    </li>
                                     <li>
                                         <a 
                                             href="#peos" 
-                                            onClick={(e) => { e.preventDefault(); setActiveModal('peos'); }}
+                                            onClick={(e) => { e.preventDefault(); setActiveModal('peos'); setActiveNav('about'); }}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             Program Education Objectives (PEOs)
@@ -110,7 +228,7 @@ export default function MainMenu() {
                                     <li>
                                         <a 
                                             href="#pos" 
-                                            onClick={(e) => { e.preventDefault(); setActiveModal('pos'); }}
+                                            onClick={(e) => { e.preventDefault(); setActiveModal('pos'); setActiveNav('about'); }}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             Program Outcomes (POs)
@@ -119,7 +237,7 @@ export default function MainMenu() {
                                     <li>
                                         <a 
                                             href="#psos" 
-                                            onClick={(e) => { e.preventDefault(); setActiveModal('psos'); }}
+                                            onClick={(e) => { e.preventDefault(); setActiveModal('psos'); setActiveNav('about'); }}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             Program Specific Outcomes (PSOs)
@@ -127,40 +245,53 @@ export default function MainMenu() {
                                     </li>
                                 </ul>
                             </li>
-                            <li><Link href="#">Student Services</Link>
+                            <li className={`menu-has-children ${activeNav === 'services' ? "menu-active" : ""}`}>
+                                <Link href="#" onClick={(e) => { e.preventDefault(); setActiveNav('services'); }}>
+                                    <span>Student Services</span>
+                                    <span className="nav-item-indicator" />
+                                </Link>
                                 <ul>
                                     <li>
-                                        <a href="https://drive.google.com/file/d/1R43bm9OBMy74JAz8SMx_-T4RMSyDhD0R/view" target="_blank">Academic Calender</a>
+                                        <a href="https://drive.google.com/file/d/1R43bm9OBMy74JAz8SMx_-T4RMSyDhD0R/view" target="_blank" rel="noopener noreferrer">Academic Calender</a>
                                     </li>
                                     <li>
-                                        <a href="https://drive.google.com/file/d/1UO1ZbYqAX5ongBuoIh-hh8BwQK8z3m_l/view?usp=sharing" target="_blank">Booklet 24-25</a>
+                                        <a href="https://drive.google.com/file/d/1UO1ZbYqAX5ongBuoIh-hh8BwQK8z3m_l/view?usp=sharing" target="_blank" rel="noopener noreferrer">Booklet 24-25</a>
                                     </li>
                                     <li>
-                                        <a href="https://drive.google.com/drive/folders/1CsUApZYDwfpl44itkin-ubXCAD0-FF5i?usp=drive_link" target="_blank">Syllabus</a>
+                                        <a href="https://drive.google.com/drive/folders/1CsUApZYDwfpl44itkin-ubXCAD0-FF5i?usp=drive_link" target="_blank" rel="noopener noreferrer">Syllabus</a>
                                     </li>
                                     <li>
-                                        <a href="https://charusat.edu.in:912/eGovernance/" target="_blank">Egovernance</a>
+                                        <a href="https://charusat.edu.in:912/eGovernance/" target="_blank" rel="noopener noreferrer">Egovernance</a>
                                     </li>
                                     <li>
-                                        <a href="https://charusat.edu.in:912/UniExamResult/" target="_blank">Exam Result</a>
+                                        <a href="https://charusat.edu.in:912/UniExamResult/" target="_blank" rel="noopener noreferrer">Exam Result</a>
                                     </li>
                                     <li>
-                                        <Link href="/student_achievements_all">Student Achievements</Link>
+                                        <Link href="/#student-achievements" onClick={() => setActiveNav('services')}>Student Achievements</Link>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li className="menu-has-children">
-                                <Link href="#">Research Labs</Link>
+                            <li className={`menu-has-children ${activeNav === 'labs' ? "menu-active" : ""}`}>
+                                <Link href="#" onClick={(e) => { e.preventDefault(); setActiveNav('labs'); }}>
+                                    <span>Research Labs</span>
+                                    <span className="nav-item-indicator" />
+                                </Link>
                                 <ul>
-                                    <li><Link href="/323A">323-A</Link></li>
-                                    <li><Link href="/323B">323-B</Link></li>
-                                    <li><Link href="/324A">324-A</Link></li>
-                                    <li><Link href="/324D">324-D</Link></li>
-                                    <li><Link href="/325">Motorola Lab(325)</Link></li>
+                                    <li><Link href="/323A" onClick={() => setActiveNav('labs')}>323-A</Link></li>
+                                    <li><Link href="/323B" onClick={() => setActiveNav('labs')}>323-B</Link></li>
+                                    <li><Link href="/324A" onClick={() => setActiveNav('labs')}>324-A</Link></li>
+                                    <li><Link href="/324D" onClick={() => setActiveNav('labs')}>324-D</Link></li>
+                                    <li><Link href="/325" onClick={() => setActiveNav('labs')}>Motorola Lab(325)</Link></li>
                                 </ul>
                             </li>
-                            <li className="nav-admission"><a href="https://admission.charusat.ac.in/" target="_blank">Admission</a></li>
+                            <li className="nav-admission">
+                                <a href="https://admission.charusat.ac.in/" target="_blank" rel="noopener noreferrer" className="nav-admission-btn">
+                                    <i className="fa fa-graduation-cap" />
+                                    <span>Admission</span>
+                                    <i className="fa fa-arrow-right" />
+                                </a>
+                            </li>
                         </ul>
 
                     </nav>

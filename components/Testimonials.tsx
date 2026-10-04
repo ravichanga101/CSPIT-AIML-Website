@@ -15,9 +15,7 @@ export default function Testimonials() {
                 <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
                     What Students <span className="grad-cyan">Say</span>
                 </h2>
-                <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', marginBottom: '50px' }}>
-                    Hear from our students about their experience at CSPIT AI-ML
-                </p>
+
 
                 <div className="owl-carousel testimonials-carousel" suppressHydrationWarning>
                     {testimonials.map((t, i) => (

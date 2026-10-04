@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const facultyAchievements = [
     {
@@ -128,155 +130,291 @@ const facultyAchievements = [
 ];
 
 export default function FacultyAchievements() {
-    const [expanded, setExpanded] = useState<number | null>(null);
+    const [selectedFaculty, setSelectedFaculty] = useState<typeof facultyAchievements[0] | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Escape key listener & body scroll lock
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setSelectedFaculty(null);
+            }
+        };
+
+        if (selectedFaculty) {
+            window.addEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [selectedFaculty]);
 
     return (
-        <section className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '60px 0 0' }}>
+        <section id="faculty-achievements" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '80px 0 96px' }}>
             <div className="container">
-
                 {/* Section badge */}
-                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '18px' }}>
                     <span className="ref-badge"><i className="fa fa-star" /> Faculty Excellence</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '48px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto 16px' }}>
                     Faculty <span className="grad-amber">Achievements</span>
                 </h2>
-
                 <div className="row">
-                    {facultyAchievements.map((item, i) => {
-                        const isOpen = expanded === i;
-                        return (
-                            <div key={i} className="col-lg-6 col-md-12" style={{ marginBottom: '24px' }}>
-                                <div
-                                    className="ref-card"
-                                    style={{
-                                        cursor: 'pointer',
-                                        transition: 'all 0.35s ease',
-                                        height: '100%',
-                                        borderColor: isOpen ? item.badgeColor + '33' : 'var(--border)',
-                                        boxShadow: isOpen ? `0 16px 48px rgba(15,23,42,0.12), 0 0 0 1px ${item.badgeColor}15` : 'var(--shadow-sm)',
-                                    }}
-                                    onClick={() => setExpanded(isOpen ? null : i)}
-                                    onMouseEnter={e => {
-                                        if (!isOpen) {
-                                            const el = e.currentTarget as HTMLElement;
-                                            el.style.borderColor = item.badgeColor + '22';
-                                            el.style.transform = 'translateY(-4px)';
-                                            el.style.boxShadow = '0 12px 40px rgba(15,23,42,0.1)';
-                                        }
-                                    }}
-                                    onMouseLeave={e => {
-                                        if (!isOpen) {
-                                            const el = e.currentTarget as HTMLElement;
-                                            el.style.borderColor = 'var(--border)';
-                                            el.style.transform = 'translateY(0)';
-                                            el.style.boxShadow = 'var(--shadow-sm)';
-                                        }
-                                    }}
-                                >
-                                    {/* Image — top, full width */}
-                                    <div style={{ height: '280px', overflow: 'hidden', position: 'relative', borderRadius: '12px 12px 0 0', background: '#f1f5f9' }}>
-                                        <img
-                                            src={item.img}
-                                            alt={item.names}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.imgPos ?? 'center', transition: 'transform 0.4s ease' }}
-                                            onError={e => (e.currentTarget.style.display = 'none')}
-                                        />
-                                        {/* Badge overlay */}
-                                        <div style={{
-                                            position: 'absolute', top: '12px', left: '12px',
-                                            background: item.badgeColor, color: '#ffffff',
-                                            padding: '3px 12px', borderRadius: '9999px',
-                                            fontSize: '11px', fontWeight: 800,
-                                        }}>{item.badge}</div>
-                                        {/* Dark gradient at bottom */}
-                                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(255,255,255,0.85) 100%)' }} />
-                                    </div>
-
-                                    {/* Highlight strip below image */}
-                                    <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                        <div style={{ color: item.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>
-                                            <i className="fa fa-trophy" style={{ marginRight: '6px' }} />{item.highlight}
-                                        </div>
-                                        <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 800, fontSize: '18px', color: '#0f172a', margin: 0, lineHeight: 1.3 }}>
-                                            {item.names}
-                                        </h4>
-                                        <p style={{ color: '#64748b', fontSize: '13px', margin: 0, fontStyle: 'italic', lineHeight: 1.5 }}>
-                                            {item.paper}
-                                        </p>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                                            <span style={{
-                                                fontSize: '12px', color: '#0c2e8a', fontWeight: 600,
-                                                display: 'flex', alignItems: 'center', gap: '5px',
-                                            }}>
-                                                <i className={`fa ${isOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`} style={{ fontSize: '10px' }} />
-                                                {isOpen ? 'Show Less' : 'Read Full Story'}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Expandable full description */}
+                    {facultyAchievements.map((item, i) => (
+                        <div key={i} className="col-lg-6 col-md-12" style={{ marginBottom: '28px' }}>
+                            <div
+                                className="ref-card"
+                                style={{
+                                    cursor: 'pointer',
+                                    transition: 'all 0.35s ease',
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    overflow: 'hidden'
+                                }}
+                                onClick={() => setSelectedFaculty(item)}
+                                onMouseEnter={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.borderColor = item.badgeColor + '55';
+                                    el.style.transform = 'translateY(-6px)';
+                                    el.style.boxShadow = '0 18px 45px rgba(15,23,42,0.12)';
+                                }}
+                                onMouseLeave={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.borderColor = 'var(--border)';
+                                    el.style.transform = 'translateY(0)';
+                                    el.style.boxShadow = 'var(--shadow-sm)';
+                                }}
+                            >
+                                {/* Image — top */}
+                                <div style={{ height: '280px', overflow: 'hidden', position: 'relative', background: '#f1f5f9' }}>
+                                    <img
+                                        src={item.img}
+                                        alt={item.names}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.imgPos ?? 'center', transition: 'transform 0.4s ease' }}
+                                        onError={e => (e.currentTarget.style.display = 'none')}
+                                    />
+                                    {/* Badge overlay — compact pill on right */}
                                     <div style={{
-                                        maxHeight: isOpen ? '600px' : '0',
-                                        overflow: 'hidden',
-                                        transition: 'max-height 0.45s ease',
+                                        position: 'absolute',
+                                        top: '14px',
+                                        right: '14px',
+                                        left: 'auto',
+                                        width: 'fit-content',
+                                        maxWidth: 'fit-content',
+                                        background: item.badgeColor,
+                                        color: '#ffffff',
+                                        padding: '4px 14px',
+                                        borderRadius: '9999px',
+                                        fontSize: '11px',
+                                        fontWeight: 800,
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        zIndex: 3
                                     }}>
-                                        <div style={{
-                                            padding: '0 30px 30px',
-                                            borderTop: `1px solid ${item.badgeColor}33`,
-                                            marginTop: '0',
-                                            paddingTop: '24px',
-                                        }}>
-                                            {item.description.map((para, pi) => (
-                                                <p key={pi} style={{
-                                                    color: pi === 0 ? '#64748b' : '#475569',
-                                                    fontSize: '14px', lineHeight: 1.85,
-                                                    marginBottom: pi < item.description.length - 1 ? '14px' : 0,
-                                                }}
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: Object.entries(item.links).reduce(
-                                                            (text, [name, url]) => text.replace(
-                                                                new RegExp(name, 'g'),
-                                                                `<a href="${url}" target="_blank" style="color:#0c2e8a;text-decoration:none;font-weight:700;">${name}</a>`
-                                                            ),
-                                                            para
-                                                        )
-                                                    }}
-                                                />
-                                            ))}
-
-                                            {/* LinkedIn links row */}
-                                            <div style={{ display: 'flex', gap: '12px', marginTop: '20px', flexWrap: 'wrap' }}>
-                                                {Object.entries(item.links).map(([name, url]) => (
-                                                    <a key={name} href={url} target="_blank" rel="noopener noreferrer"
-                                                        onClick={e => e.stopPropagation()}
-                                                        style={{
-                                                            display: 'inline-flex', alignItems: 'center', gap: '7px',
-                                                            background: 'rgba(12,46,138,0.06)',
-                                                            border: '1px solid rgba(12,46,138,0.15)',
-                                                            color: '#0c2e8a', fontSize: '12px', fontWeight: 600,
-                                                            padding: '7px 16px', borderRadius: '9999px',
-                                                            textDecoration: 'none', transition: 'all 0.2s ease',
-                                                        }}
-                                                        onMouseEnter={e => {
-                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(12,46,138,0.12)';
-                                                        }}
-                                                        onMouseLeave={e => {
-                                                            (e.currentTarget as HTMLElement).style.background = 'rgba(12,46,138,0.06)';
-                                                        }}
-                                                    >
-                                                        <i className="fa fa-linkedin" /> {name}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        </div>
+                                        {item.badge}
                                     </div>
+                                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 40%, rgba(255,255,255,0.9) 100%)' }} />
+                                </div>
+
+                                {/* Content below image */}
+                                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                    <div style={{ color: item.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
+                                        <i className="fa fa-trophy" style={{ marginRight: '6px' }} />{item.highlight}
+                                    </div>
+                                    <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 800, fontSize: '19px', color: '#0f172a', margin: '0 0 6px 0', lineHeight: 1.35 }}>
+                                        {item.names}
+                                    </h4>
+                                    <p style={{ color: '#64748b', fontSize: '13.5px', margin: '0', fontStyle: 'italic', lineHeight: 1.55 }}>
+                                        {item.paper}
+                                    </p>
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
             </div>
+
+            {/* Faculty Achievement Modal Popup — Compact Card Style */}
+            {mounted && selectedFaculty && createPortal(
+                <div
+                    className="academic-modal-overlay"
+                    onClick={(e) => { if (e.target === e.currentTarget) setSelectedFaculty(null); }}
+                    role="dialog"
+                    aria-modal="true"
+                    style={{ padding: '20px' }}
+                >
+                    <div
+                        style={{
+                            maxWidth: '540px',
+                            width: '100%',
+                            maxHeight: '90vh',
+                            background: '#ffffff',
+                            borderRadius: '22px',
+                            boxShadow: '0 25px 60px -15px rgba(0,0,0,0.4), 0 0 0 1px rgba(226, 232, 240, 0.8)',
+                            position: 'relative',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            overflow: 'hidden',
+                            animation: 'academicModalZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                        }}
+                    >
+                        {/* Circular Close Cross Button on Top-Right */}
+                        <button
+                            type="button"
+                            onClick={() => setSelectedFaculty(null)}
+                            aria-label="Close"
+                            style={{
+                                position: 'absolute',
+                                top: '24px',
+                                right: '24px',
+                                zIndex: 40,
+                                width: '34px',
+                                height: '34px',
+                                borderRadius: '50%',
+                                background: 'rgba(15, 23, 42, 0.82)',
+                                backdropFilter: 'blur(6px)',
+                                border: '2px solid #ffffff',
+                                color: '#ffffff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                boxShadow: '0 4px 14px rgba(0,0,0,0.35)',
+                                transition: 'all 0.2s ease',
+                                outline: 'none',
+                                padding: 0
+                            }}
+                            onMouseEnter={e => {
+                                (e.currentTarget as HTMLElement).style.background = '#dc2626';
+                                (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)';
+                            }}
+                            onMouseLeave={e => {
+                                (e.currentTarget as HTMLElement).style.background = 'rgba(15, 23, 42, 0.82)';
+                                (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                            }}
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+
+                        {/* Scrollable Container for Photo + Story + LinkedIn */}
+                        <div
+                            className="academic-modal-body"
+                            style={{
+                                padding: '16px 16px 24px 16px',
+                                overflowY: 'auto',
+                                flex: 1,
+                                background: '#ffffff'
+                            }}
+                        >
+                            {/* Photo with Curvature / Radius */}
+                            <div style={{
+                                position: 'relative',
+                                width: '100%',
+                                background: '#0f172a',
+                                borderRadius: '16px',
+                                overflow: 'hidden',
+                                boxShadow: '0 4px 20px rgba(15, 23, 42, 0.12)',
+                                border: '1px solid #e2e8f0'
+                            }}>
+                                <img
+                                    src={selectedFaculty.img}
+                                    alt={selectedFaculty.names}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        maxHeight: '460px',
+                                        objectFit: 'contain',
+                                        display: 'block',
+                                        background: '#0f172a',
+                                        borderRadius: '16px'
+                                    }}
+                                />
+                            </div>
+
+                            {/* Content: Story and LinkedIn Link */}
+                            <div style={{ padding: '20px 8px 6px' }}>
+                                <div style={{ color: selectedFaculty.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
+                                    <i className="fa fa-trophy" style={{ marginRight: '6px' }} />{selectedFaculty.highlight}
+                                </div>
+                                <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 800, fontSize: '19px', color: '#0f172a', margin: '0 0 14px 0' }}>
+                                    {selectedFaculty.names}
+                                </h4>
+
+                                {/* Story (Paragraphs) */}
+                                <div style={{ marginBottom: '16px' }}>
+                                    {selectedFaculty.description.map((para, pi) => (
+                                        <p
+                                            key={pi}
+                                            style={{
+                                                color: '#475569',
+                                                fontSize: '13.5px',
+                                                lineHeight: 1.75,
+                                                marginBottom: pi < selectedFaculty.description.length - 1 ? '12px' : 0,
+                                            }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: Object.entries(selectedFaculty.links).reduce(
+                                                    (text, [name, url]) => text.replace(
+                                                        new RegExp(name, 'g'),
+                                                        `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#0c2e8a;text-decoration:none;font-weight:700;">${name}</a>`
+                                                    ),
+                                                    para
+                                                )
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+
+                                {/* LinkedIn links */}
+                                {selectedFaculty.links && Object.keys(selectedFaculty.links).length > 0 && (
+                                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '16px' }}>
+                                        {Object.entries(selectedFaculty.links).map(([name, url]) => (
+                                            <a
+                                                key={name}
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '6px',
+                                                    background: 'rgba(12,46,138,0.06)',
+                                                    border: '1px solid rgba(12,46,138,0.18)',
+                                                    color: '#0c2e8a',
+                                                    fontSize: '12px',
+                                                    fontWeight: 600,
+                                                    padding: '6px 14px',
+                                                    borderRadius: '999px',
+                                                    textDecoration: 'none',
+                                                    transition: 'all 0.2s ease'
+                                                }}
+                                            >
+                                                <i className="fa fa-linkedin-square" style={{ color: '#0077b5', fontSize: '14px' }} />
+                                                <span>{name}</span>
+                                                <i className="fa fa-external-link" style={{ fontSize: '10px', opacity: 0.6 }} />
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>,
+                document.body
+            )}
         </section>
     );
 }

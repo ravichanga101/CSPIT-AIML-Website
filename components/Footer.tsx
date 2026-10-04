@@ -5,7 +5,7 @@ const quickLinks = [
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '/#about_us' },
     { label: 'Research Labs', href: '/323A' },
-    { label: 'Student Achievements', href: '/student_achievements_all' },
+    { label: 'Student Achievements', href: '/#student-achievements' },
     { label: 'Admission', href: 'https://admission.charusat.ac.in/' },
 ];
 const labLinks = [

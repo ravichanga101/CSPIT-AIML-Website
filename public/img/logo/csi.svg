@@ -1,0 +1,19 @@
+<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <!-- Round Seal -->
+  <g transform="translate(80, 60)">
+    <circle cx="0" cy="0" r="48" stroke="#1D4ED8" stroke-width="2.8" fill="#ffffff" />
+    <circle cx="0" cy="0" r="44" stroke="#1D4ED8" stroke-width="1.2" fill="none" />
+    
+    <!-- CSI Center Diamond / Triangles -->
+    <rect x="-22" y="-22" width="44" height="44" fill="#1D4ED8" rx="4" />
+    <polygon points="-16,-16 0,-2 -16,-2" fill="#ffffff" />
+    <polygon points="16,-16 0,-2 16,-2" fill="#ffffff" />
+    <polygon points="-16,16 0,2 -16,2" fill="#ffffff" />
+    <polygon points="16,16 0,2 16,2" fill="#ffffff" />
+    <circle cx="0" cy="0" r="5" fill="#ffffff" />
+    
+    <!-- Outer Text -->
+    <text x="0" y="-33" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="6.5" fill="#1D4ED8" text-anchor="middle" letter-spacing="0.8">COMPUTER SOCIETY OF INDIA</text>
+    <text x="0" y="39" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="6.5" fill="#1D4ED8" text-anchor="middle">ESTD. 1965</text>
+  </g>
+</svg>

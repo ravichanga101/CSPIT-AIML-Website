@@ -2,24 +2,24 @@
 import { config, links } from '@/lib/config';
 
 const stats = [
-    { icon: 'fa-book',           value: config.total_publications,        label: 'Publications' },
-    { icon: 'fa-users',          value: config.student_teacher_ratio,     label: 'Student Teacher Ratio' },
-    { icon: 'fa-graduation-cap', value: config.Intake,                    label: 'No. of Seats' },
-    { icon: 'fa-calendar',       value: config.total_workshops_org,       label: 'Events Organized' },
-    { icon: 'fa-trophy',         value: config.total_projects_and_grants, label: 'Projects & Grants' },
+    { icon: 'fa-book', value: config.total_publications, label: 'Publications' },
+    { icon: 'fa-users', value: config.student_teacher_ratio, label: 'Student Teacher Ratio' },
+    { icon: 'fa-graduation-cap', value: config.Intake, label: 'No. of Seats' },
+    { icon: 'fa-calendar', value: config.total_workshops_org, label: 'Events Organized' },
+    { icon: 'fa-trophy', value: config.total_projects_and_grants, label: 'Projects & Grants' },
 ];
 
 const highlights = [
-    { icon: 'fa-flask',         text: 'State-of-the-art AI & ML laboratories' },
-    { icon: 'fa-certificate',   text: 'Industry certifications: AWS, Microsoft, Oracle' },
-    { icon: 'fa-briefcase',     text: `${config.placement_percent} placement (${config.placement_year})` },
-    { icon: 'fa-university',    text: 'Part of CHARUSAT — NAAC A+ accredited university' },
+    { icon: 'fa-flask', text: 'State-of-the-art AI & ML laboratories' },
+    { icon: 'fa-certificate', text: 'Industry certifications: AWS, Microsoft, Oracle' },
+    { icon: 'fa-briefcase', text: `${config.placement_percent} placement (${config.placement_year})` },
+    { icon: 'fa-university', text: 'Part of CHARUSAT — NAAC A+ accredited university' },
 ];
 
 export default function AboutUs() {
     return (
         <main id="main">
-            <section id="about_us" className="wow fadeInUp about-section">
+            <section id="about_us" className="wow fadeInUp about-section" style={{ scrollMarginTop: '100px' }}>
                 <div className="container">
 
                     {/* ── Section header ── */}
@@ -31,9 +31,6 @@ export default function AboutUs() {
                         <h2 className="about-heading">
                             About <span>Us</span>
                         </h2>
-                        <p className="about-subheading">
-                            {config.name_of_dept} (Estd.&nbsp;{config.dept_esta})
-                        </p>
                     </div>
 
                     {/* ── Two-column body ── */}
@@ -55,47 +52,50 @@ export default function AboutUs() {
                                         <span className="about-highlight-icon">
                                             <i className={`fa ${h.icon}`} />
                                         </span>
-                                        <span>{h.text}</span>
+                                        <span className="about-highlight-text">{h.text}</span>
+                                        <i className="fa fa-arrow-right about-highlight-arrow" />
                                     </li>
                                 ))}
                             </ul>
-
-                            <div className="about-cta-row">
-                                <a href={links.brochure} target="_blank" rel="noopener noreferrer" className="about-btn-pri">
-                                    <i className="fa fa-download" /> Download Brochure
-                                </a>
-                                <a href="#contact_us" className="about-btn-sec">
-                                    <i className="fa fa-envelope-o" /> Contact Us
-                                </a>
-                            </div>
                         </div>
 
                         {/* Right — placement spotlight card */}
                         <div className="about-right">
                             <div className="about-spotlight-card">
                                 <div className="about-spotlight-top">
-                                    <div className="about-spotlight-icon">
-                                        <i className="fa fa-line-chart" />
+                                    <div className="about-spotlight-header-left">
+                                        <div className="about-spotlight-icon">
+                                            <i className="fa fa-line-chart" />
+                                        </div>
+                                        <div>
+                                            <div className="about-spotlight-label">Placement Record</div>
+                                            <div className="about-spotlight-year">{config.placement_year}</div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div className="about-spotlight-label">Placement Record</div>
-                                        <div className="about-spotlight-year">{config.placement_year}</div>
+                                    <span className="about-spotlight-badge">
+                                        <i className="fa fa-check-circle" /> Verified
+                                    </span>
+                                </div>
+
+                                <div className="about-spotlight-main">
+                                    <div className="about-spotlight-value">{config.placement_percent}</div>
+                                    <div className="about-spotlight-sub">Campus Placement Rate</div>
+                                    <div className="about-spotlight-pill">
+                                        <i className="fa fa-shield" /> Exceptional Career Outcomes
                                     </div>
                                 </div>
-                                <div className="about-spotlight-value">{config.placement_percent}</div>
-                                <div className="about-spotlight-sub">Campus Placement Rate</div>
+
                                 <div className="about-spotlight-divider" />
+
                                 <div className="about-spotlight-meta">
                                     <div className="about-spotlight-meta-item">
                                         <span className="about-spotlight-meta-val">{config.Intake}</span>
                                         <span className="about-spotlight-meta-lbl">Seats</span>
                                     </div>
-                                    <div className="about-spotlight-meta-sep" />
                                     <div className="about-spotlight-meta-item">
                                         <span className="about-spotlight-meta-val">{config.dept_esta}</span>
                                         <span className="about-spotlight-meta-lbl">Est. Year</span>
                                     </div>
-                                    <div className="about-spotlight-meta-sep" />
                                     <div className="about-spotlight-meta-item">
                                         <span className="about-spotlight-meta-val">{config.total_publications}</span>
                                         <span className="about-spotlight-meta-lbl">Publications</span>

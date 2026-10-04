@@ -1,5 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+
 const achievements = [
     { img: '/img/students/student20.jpg', fallback: '/img/photos/1.jpg', badge: 'MathFlow AI', badgeColor: '#6366f1', name: 'AIML Students', course: 'B.Tech AI-ML', desc: 'Strong fundamentals meet effective AI education — students demonstrated outstanding performance at MathFlow AI, conducted by the Math for AI Club at CSPIT.' },
     { img: '/img/students/student21.jpg', fallback: '/img/photos/2.jpg', badge: 'Top 2%', badgeColor: '#e11d48', name: 'India AI Summit Finalists', course: 'India AI Summit 2026', desc: 'Rising as Top 2% Finalists at India AI Summit 2026, Bharat Mandapam, New Delhi — a remarkable achievement among thousands of participants across the country.' },
@@ -25,8 +28,36 @@ const achievements = [
 ];
 
 export default function StudentAchievements() {
+    const [selectedAchievement, setSelectedAchievement] = useState<typeof achievements[0] | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Escape key listener & body scroll lock
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setSelectedAchievement(null);
+            }
+        };
+
+        if (selectedAchievement) {
+            window.addEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [selectedAchievement]);
+
     return (
-        <section id="student-achievements" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0' }}>
+        <section id="student-achievements" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0', scrollMarginTop: '100px' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-trophy" />Our Pride</span>
@@ -34,24 +65,56 @@ export default function StudentAchievements() {
                 <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
                     Student <span className="grad-amber">Achievements</span>
                 </h2>
-                <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', marginBottom: '50px' }}>
-                    Celebrating our outstanding students and their remarkable accomplishments
-                </p>
-
                 <div className="row">
                     {achievements.map((a, i) => (
                         <div key={i} className="col-lg-4 col-md-6" style={{ marginBottom: '28px' }}>
-                            <div className="ref-card" style={{ overflow: 'hidden', height: '100%' }}
-                                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = a.badgeColor + '22'; el.style.transform = 'translateY(-6px)'; el.style.boxShadow = `0 16px 48px rgba(15,23,42,0.12)`; }}
-                                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = 'var(--shadow-sm)'; }}
+                            <div
+                                className="ref-card"
+                                style={{
+                                    overflow: 'hidden',
+                                    height: '100%',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    transition: 'all 0.3s ease'
+                                }}
+                                onClick={() => setSelectedAchievement(a)}
+                                onMouseEnter={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.borderColor = a.badgeColor + '55';
+                                    el.style.transform = 'translateY(-6px)';
+                                    el.style.boxShadow = `0 18px 45px rgba(15,23,42,0.12)`;
+                                }}
+                                onMouseLeave={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.borderColor = 'var(--border)';
+                                    el.style.transform = 'translateY(0)';
+                                    el.style.boxShadow = 'var(--shadow-sm)';
+                                }}
                             >
                                 <div style={{ height: '280px', overflow: 'hidden', position: 'relative', background: '#f1f5f9' }}>
-                                    <img src={a.img} alt={a.name} onError={e => e.currentTarget.src = a.fallback}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
-                                    <div style={{ position: 'absolute', top: '12px', right: '12px', background: a.badgeColor, color: '#ffffff', padding: '3px 12px', borderRadius: '9999px', fontSize: '11px', fontWeight: 800 }}>{a.badge}</div>
+                                    <img
+                                        src={a.img}
+                                        alt={a.name}
+                                        onError={e => e.currentTarget.src = a.fallback}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                                    />
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '12px',
+                                        right: '12px',
+                                        background: a.badgeColor,
+                                        color: '#ffffff',
+                                        padding: '3px 12px',
+                                        borderRadius: '9999px',
+                                        fontSize: '11px',
+                                        fontWeight: 800
+                                    }}>
+                                        {a.badge}
+                                    </div>
                                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,transparent 40%,rgba(255,255,255,0.9) 100%)' }} />
                                 </div>
-                                <div style={{ padding: '22px', textAlign: 'center' }}>
+                                <div style={{ padding: '22px', textAlign: 'center', display: 'flex', flexDirection: 'column', flex: 1 }}>
                                     <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '17px', color: '#0f172a', marginBottom: '5px' }}>{a.name}</h4>
                                     <div style={{ color: a.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>{a.course}</div>
                                     <p style={{ color: '#64748b', fontSize: '13px', lineHeight: 1.6, margin: 0 }}>{a.desc}</p>
@@ -60,16 +123,126 @@ export default function StudentAchievements() {
                         </div>
                     ))}
                 </div>
-
-                <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <a href="/student_achievements_all" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #0c2e8a, #2563eb)', color: '#ffffff', padding: '12px 32px', borderRadius: '9999px', fontWeight: 700, fontSize: '14px', textDecoration: 'none', boxShadow: '0 4px 20px rgba(12,46,138,0.25)', transition: 'all .3s ease' }}
-                        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-3px)'; el.style.boxShadow = '0 10px 30px rgba(12,46,138,0.35)'; }}
-                        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 4px 20px rgba(12,46,138,0.25)'; }}
-                    >
-                        View All Achievements <i className="fa fa-arrow-right" />
-                    </a>
-                </div>
             </div>
+
+            {/* Student Achievement Modal Popup — Compact Card Style */}
+            {mounted && selectedAchievement && createPortal(
+                <div
+                    className="academic-modal-overlay"
+                    onClick={(e) => { if (e.target === e.currentTarget) setSelectedAchievement(null); }}
+                    role="dialog"
+                    aria-modal="true"
+                    style={{ padding: '20px' }}
+                >
+                    <div
+                        style={{
+                            maxWidth: '520px',
+                            width: '100%',
+                            maxHeight: '90vh',
+                            background: '#ffffff',
+                            borderRadius: '22px',
+                            boxShadow: '0 25px 60px -15px rgba(0,0,0,0.4), 0 0 0 1px rgba(226, 232, 240, 0.8)',
+                            position: 'relative',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            overflow: 'hidden',
+                            animation: 'academicModalZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                        }}
+                    >
+                        {/* Circular Close Cross Button on Top-Right */}
+                        <button
+                            type="button"
+                            onClick={() => setSelectedAchievement(null)}
+                            aria-label="Close"
+                            style={{
+                                position: 'absolute',
+                                top: '24px',
+                                right: '24px',
+                                zIndex: 40,
+                                width: '34px',
+                                height: '34px',
+                                borderRadius: '50%',
+                                background: 'rgba(15, 23, 42, 0.82)',
+                                backdropFilter: 'blur(6px)',
+                                border: '2px solid #ffffff',
+                                color: '#ffffff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                boxShadow: '0 4px 14px rgba(0,0,0,0.35)',
+                                transition: 'all 0.2s ease',
+                                outline: 'none',
+                                padding: 0
+                            }}
+                            onMouseEnter={e => {
+                                (e.currentTarget as HTMLElement).style.background = '#dc2626';
+                                (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)';
+                            }}
+                            onMouseLeave={e => {
+                                (e.currentTarget as HTMLElement).style.background = 'rgba(15, 23, 42, 0.82)';
+                                (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                            }}
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+
+                        {/* Scrollable Container for Photo + Description */}
+                        <div
+                            className="academic-modal-body"
+                            style={{
+                                padding: '16px 16px 24px 16px',
+                                overflowY: 'auto',
+                                flex: 1,
+                                background: '#ffffff'
+                            }}
+                        >
+                            {/* Photo with Curvature / Radius */}
+                            <div style={{
+                                position: 'relative',
+                                width: '100%',
+                                background: '#0f172a',
+                                borderRadius: '16px',
+                                overflow: 'hidden',
+                                boxShadow: '0 4px 20px rgba(15, 23, 42, 0.12)',
+                                border: '1px solid #e2e8f0'
+                            }}>
+                                <img
+                                    src={selectedAchievement.img}
+                                    alt={selectedAchievement.name}
+                                    onError={e => { e.currentTarget.src = selectedAchievement.fallback; }}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        maxHeight: '460px',
+                                        objectFit: 'contain',
+                                        display: 'block',
+                                        background: '#0f172a',
+                                        borderRadius: '16px'
+                                    }}
+                                />
+                            </div>
+
+                            {/* Same Information as Main Page Card */}
+                            <div style={{ padding: '20px 10px 4px', textAlign: 'center' }}>
+                                <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '18px', color: '#0f172a', marginBottom: '5px' }}>
+                                    {selectedAchievement.name}
+                                </h4>
+                                <div style={{ color: selectedAchievement.badgeColor, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
+                                    {selectedAchievement.course}
+                                </div>
+                                <p style={{ color: '#475569', fontSize: '13.5px', lineHeight: 1.7, margin: 0 }}>
+                                    {selectedAchievement.desc}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>,
+                document.body
+            )}
         </section>
     );
 }

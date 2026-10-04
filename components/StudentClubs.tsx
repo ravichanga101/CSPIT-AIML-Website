@@ -149,7 +149,7 @@ export default function StudentClubs() {
     }, [selectedClub]);
 
     return (
-        <section id="student-achievements" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0' }}>
+        <section id="student-clubs" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-users" />Student Community</span>
@@ -157,25 +157,21 @@ export default function StudentClubs() {
                 <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
                     Student <span className="grad-green">Clubs</span>
                 </h2>
-                <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', marginBottom: '50px' }}>
-                    Empowering student excellence through innovation, collaboration, and achievement
-                </p>
-
                 <div className="row" style={{ justifyContent: 'center' }}>
                     {clubs.map((club, i) => (
                         <div key={i} className="col-lg-4 col-md-6" style={{ marginBottom: '28px' }}>
-                            <div 
-                                className="ref-card club-card-container" 
+                            <div
+                                className="ref-card club-card-container"
                                 style={{ overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column' }}
                                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = club.color + '22'; el.style.transform = 'translateY(-6px)'; el.style.boxShadow = `0 16px 48px rgba(15,23,42,0.1), 0 0 0 1px ${club.color}10`; }}
                                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = 'var(--shadow-sm)'; }}
                             >
                                 <div style={{ height: '240px', overflow: 'hidden', position: 'relative', background: '#f1f5f9' }}>
-                                    <img 
-                                        src={club.img} 
-                                        alt={club.name} 
+                                    <img
+                                        src={club.img}
+                                        alt={club.name}
                                         onError={e => e.currentTarget.src = club.fallback}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} 
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
                                     />
                                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,transparent 40%,rgba(255,255,255,0.9) 100%)' }} />
                                 </div>
@@ -192,9 +188,9 @@ export default function StudentClubs() {
 
                                     {/* Action Button - Single View Details */}
                                     <div className="club-card-actions">
-                                        <button 
-                                            type="button" 
-                                            onClick={() => setSelectedClub(club)} 
+                                        <button
+                                            type="button"
+                                            onClick={() => setSelectedClub(club)}
                                             className="club-btn club-btn-details"
                                         >
                                             <span>View Details</span>
@@ -210,17 +206,17 @@ export default function StudentClubs() {
 
             {/* Club Details Modal Popup */}
             {mounted && selectedClub && createPortal(
-                <div 
-                    className="academic-modal-overlay club-modal-overlay" 
+                <div
+                    className="academic-modal-overlay club-modal-overlay"
                     onClick={(e) => { if (e.target === e.currentTarget) setSelectedClub(null); }}
                     role="dialog"
                     aria-modal="true"
                 >
                     <div className="academic-modal-container club-modal-container">
                         {/* Top Accent Bar */}
-                        <div 
-                            className="academic-modal-bar" 
-                            style={{ background: `linear-gradient(90deg, #1E3A5F 0%, ${selectedClub.color} 50%, #38BDF8 100%)` }} 
+                        <div
+                            className="academic-modal-bar"
+                            style={{ background: `linear-gradient(90deg, #1E3A5F 0%, ${selectedClub.color} 50%, #38BDF8 100%)` }}
                         />
 
                         {/* Modal Header */}
@@ -236,6 +232,17 @@ export default function StudentClubs() {
                                     {selectedClub.type} · Department of AIML, CSPIT
                                 </p>
                             </div>
+                            <button
+                                type="button"
+                                className="academic-modal-close"
+                                onClick={() => setSelectedClub(null)}
+                                aria-label="Close modal"
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
 
                         {/* Modal Body */}
@@ -259,8 +266,8 @@ export default function StudentClubs() {
                                         <span className="club-faculty-dept">Department of Artificial Intelligence &amp; Machine Learning</span>
                                         {selectedClub.facultyEmail && (
                                             <div style={{ marginTop: '10px' }}>
-                                                <a 
-                                                    href={`mailto:${selectedClub.facultyEmail}`} 
+                                                <a
+                                                    href={`mailto:${selectedClub.facultyEmail}`}
                                                     className="club-contact-link"
                                                     style={{
                                                         display: 'inline-flex',
@@ -339,19 +346,19 @@ export default function StudentClubs() {
                         {/* Modal Footer */}
                         <div className="academic-modal-footer club-modal-footer">
                             {selectedClub.website ? (
-                                <a 
-                                    href={selectedClub.website} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
+                                <a
+                                    href={selectedClub.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="club-modal-portal-btn"
                                 >
                                     <span>Visit Official Club Website</span>
                                     <i className="fa fa-external-link" />
                                 </a>
                             ) : <div />}
-                            <button 
-                                type="button" 
-                                className="academic-modal-close-btn" 
+                            <button
+                                type="button"
+                                className="academic-modal-close-btn"
                                 onClick={() => setSelectedClub(null)}
                             >
                                 Close

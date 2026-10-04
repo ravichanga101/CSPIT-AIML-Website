@@ -96,7 +96,7 @@ export function middleware(request: NextRequest) {
                     newPath = '/lab_virtual';
                     break;
                 case 'student_achievements_all':
-                    newPath = '/student_achievements_all';
+                    newPath = '/#student-achievements';
                     break;
                 default:
                     // If no match found, maybe just let it through or 404? 

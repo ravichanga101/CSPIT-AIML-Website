@@ -39,7 +39,7 @@ export default function RootLayout({
         <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
         <link href="/lib/magnific-popup/magnific-popup.css" rel="stylesheet" />
         <link href="/css/style.css" rel="stylesheet" />
-        <link href="/css/design.css" rel="stylesheet" />
+        <link href="/css/design.css?v=1.9" rel="stylesheet" />
       </head>
       <body id="body">
         <DynamicBackground />

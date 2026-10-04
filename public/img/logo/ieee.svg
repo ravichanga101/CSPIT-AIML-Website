@@ -1,0 +1,15 @@
+<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <!-- IEEE Diamond -->
+  <g transform="translate(14, 14)">
+    <polygon points="25,2 48,25 25,48 2,25" fill="#00629B" />
+    <circle cx="25" cy="25" r="14" fill="#ffffff" />
+    <!-- IEEE Arrow and circles -->
+    <path d="M25 15 L25 35 M18 25 L32 25" stroke="#00629B" stroke-width="2.5" />
+    <path d="M21 19 L25 15 L29 19" stroke="#00629B" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <circle cx="25" cy="25" r="3" fill="#00629B" />
+  </g>
+  <!-- IEEE text -->
+  <text x="74" y="48" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="34" fill="#00629B" letter-spacing="-0.5">IEEE</text>
+  <!-- Subtitle -->
+  <text x="75" y="65" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="8.5" fill="#00629B" letter-spacing="0.5">CHARUSAT Student Branch</text>
+</svg>

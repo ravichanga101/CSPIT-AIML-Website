@@ -26,7 +26,14 @@ export const config = {
     mission: `
     <p class="mission_class">To provide educational excellence in Artificial Intelligence and Machine
     Learning, fostering critical thinking and ethical practices.</p>
-  `,
+    `,
+
+    major_recruiters: [
+        'TCS', 'Infosys', 'Wipro', 'IBM', 'Tech Mahindra', 'Capgemini',
+        'Cognizant', 'Amazon', 'eInfochips', 'CREST Data System', 'RapidOps',
+        'Tatvasoft', 'L&T', 'Adani Group', 'Torrent Power', 'BOSCH',
+        'Tata', 'Amul', 'Reliance', 'ICICI Bank', 'Motorola', 'Philips'
+    ],
 };
 
 export const links = {
