@@ -8,23 +8,29 @@ interface HomeSliderProps {
 }
 
 export default function HomeSlider({ images }: HomeSliderProps) {
+    // Ensure laboratory photo (2.jpeg) is strictly the initial slide matching user reference
+    const labPhoto = images?.find(img => img.includes('2.jpeg') || img.includes('2.jpg'));
+    const otherPhotos = images?.filter(img => img !== labPhoto) || [];
+    const slideImages = labPhoto ? [labPhoto, ...otherPhotos] : (images || []);
+
     const [cur, setCur] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
 
     const next = useCallback(() => {
-        if (!images || images.length === 0) return;
-        setCur(p => (p + 1) % images.length);
-    }, [images]);
+        if (!slideImages || slideImages.length === 0) return;
+        setCur(p => (p + 1) % slideImages.length);
+    }, [slideImages]);
 
     const prev = useCallback(() => {
-        if (!images || images.length === 0) return;
-        setCur(p => (p - 1 + images.length) % images.length);
-    }, [images]);
+        if (!slideImages || slideImages.length === 0) return;
+        setCur(p => (p - 1 + slideImages.length) % slideImages.length);
+    }, [slideImages]);
 
     useEffect(() => {
-        if (!images || images.length === 0) return;
-        const timer = setInterval(next, 4500);
+        if (!slideImages || slideImages.length === 0 || isHovered) return;
+        const timer = setInterval(next, 5000);
         return () => clearInterval(timer);
-    }, [next, images]);
+    }, [next, slideImages, isHovered]);
 
     return (
         <section id="intro" className="hero-section-redesign">
@@ -161,18 +167,28 @@ export default function HomeSlider({ images }: HomeSliderProps) {
                     {/* RIGHT COLUMN: 3D LAYERED SHOWCASE EXACTLY AS REFERENCE */}
                     <div className="hero-right-col">
                         <div className="hero-showcase-stage">
-                            {/* Wing 1: Left Cyan Glowing Glass Curved Fin */}
-                            <div className="hero-wing-left" aria-hidden="true" />
+                            {/* Giant Circular Cosmic Arc Halo on Left */}
+                            <div className="hero-wing-halo" aria-hidden="true" />
 
                             {/* Wing 2: Top-Right Angled Translucent Backplate */}
                             <div className="hero-wing-right" aria-hidden="true" />
 
-                            {/* Wing 3: Bottom-Right Radial Electric Blue Wave */}
+                            {/* Wing 1: Left Cyan Glowing Glass Curved Fin */}
+                            <div className="hero-wing-left" aria-hidden="true" />
+
+                            {/* Wing 3: Right Cyan Glowing Glass Curved Fin */}
+                            <div className="hero-wing-side-right" aria-hidden="true" />
+
+                            {/* Wing 4: Bottom-Right Radial Electric Blue Wave / Swoop */}
                             <div className="hero-wing-bottom" aria-hidden="true" />
 
                             {/* Main Photo Frame */}
-                            <div className="hero-photo-showcase-frame">
-                                {images && images.map((src, idx) => (
+                            <div 
+                                className="hero-photo-showcase-frame"
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                {slideImages && slideImages.map((src, idx) => (
                                     <img
                                         key={idx}
                                         src={src}
@@ -203,7 +219,7 @@ export default function HomeSlider({ images }: HomeSliderProps) {
                                         <i className="fa fa-chevron-right" />
                                     </button>
                                     <div className="hero-dots-wrap">
-                                        {images && images.slice(0, 8).map((_, i) => (
+                                        {slideImages && slideImages.slice(0, 8).map((_, i) => (
                                             <button
                                                 key={i}
                                                 type="button"

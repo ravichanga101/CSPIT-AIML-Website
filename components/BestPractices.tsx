@@ -1,282 +1,275 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface PracticeItem {
+    id: string;
+    num: string;
     title: string;
     description: string;
-    color: string;
-    icon: React.ReactNode;
+    icon: string;
 }
 
-const practices: PracticeItem[] = [
+// 10 Best Practices numbered sequentially: 01-05 in row 1, 06-10 in row 2
+const topPractices: PracticeItem[] = [
     {
+        id: 'bp-1',
+        num: '01',
         title: 'MOOC Certifications',
         description: 'Enhancing knowledge through online courses.',
-        color: '#4338ca', // Deep Royal Indigo
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.55L3.82 9 12 4.55 20.18 9 12 11.55zM5 13.18v4C5 19.84 8.13 22 12 22s7-2.16 7-4.82v-4l-7 3.82-7-3.82z" />
-            </svg>
-        ),
+        icon: 'fa-graduation-cap',
     },
     {
+        id: 'bp-2',
+        num: '02',
         title: 'Industry Certifications',
         description: 'Professional credentials from tech giants.',
-        color: '#ef4444', // Coral Red
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M12 2l2.4 2.1 3.1-.6 1.4 2.8 3 .9-.3 3.2 2.1 2.4-1.5 2.8.9 3-2.8 1.4-.6 3.1-3.2-.3-2.4 2.1-2.4-2.1-3.2.3-.6-3.1-2.8-1.4.9-3-1.5-2.8 2.1-2.4-.3-3.2 3-.9 1.4-2.8 3.1.6L12 2z" />
-            </svg>
-        ),
+        icon: 'fa-certificate',
     },
     {
+        id: 'bp-3',
+        num: '03',
         title: 'Expert Faculty',
         description: 'Learning from highly experienced educators.',
-        color: '#db2777', // Rose / Pink
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M20 3H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v2H6v2h12v-2h-2v-2h4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12H4V5h16v10z" />
-                <circle cx="9" cy="8.5" r="2" />
-                <path d="M12.5 13.5c0-1.7-1.6-3-3.5-3s-3.5 1.3-3.5 3v.5h7v-.5z" />
-                <rect x="14" y="7" width="4" height="1.8" rx="0.9" />
-                <rect x="14" y="10" width="4" height="1.8" rx="0.9" />
-            </svg>
-        ),
+        icon: 'fa-desktop',
     },
     {
+        id: 'bp-4',
+        num: '04',
         title: 'Advanced Laboratories',
         description: 'Hands-on experience with modern facilities.',
-        color: '#8b5cf6', // Electric Purple
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M19 20L14 8V4h1V2H9v2h1v4L5 20c-.8 1.3.1 3 1.7 3h10.6c1.6 0 2.5-1.7 1.7-3zM8.3 18l3.1-7.5V4h1.2v6.5l3.1 7.5H8.3z" />
-                <circle cx="10.5" cy="15" r="1" />
-                <circle cx="13.5" cy="16.5" r="1.2" />
-            </svg>
-        ),
+        icon: 'fa-flask',
     },
     {
+        id: 'bp-5',
+        num: '05',
         title: 'Placement Excellence',
         description: 'Strong placement record with dedicated support.',
-        color: '#16a34a', // Emerald Green
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10-2h4v2h-4V4zm10 15H4V8h16v11z" />
-                <rect x="10" y="10" width="4" height="3" rx="1" />
-            </svg>
-        ),
-    },
-    {
-        title: 'Competitive Exam Prep',
-        description: 'Guidance and resources for national exams.',
-        color: '#f59e0b', // Amber Orange
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.1 11.9 1 10.5 1S8 2.1 8 3.5V5H4c-1.1 0-2 .9-2 2v3.8h1.5c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5V22H17c1.1 0 2-.9 2-2v-4h1.5c1.4 0 2.5-1.1 2.5-2.5s-1.1-2.5-2.5-2.5z" />
-            </svg>
-        ),
-    },
-    {
-        title: 'Collaborative Learning',
-        description: 'Continuous evaluation and teamwork-focused environment.',
-        color: '#2563eb', // Royal Cobalt Blue
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-            </svg>
-        ),
-    },
-    {
-        title: 'Vibrant Student Clubs',
-        description: 'Active participation in extracurricular activities.',
-        color: '#f97316', // Red-Orange
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <circle cx="12" cy="7" r="3.2" />
-                <path d="M12 11.5c-2.7 0-6 1.4-6 3.8V17h12v-1.7c0-2.4-3.3-3.8-6-3.8z" />
-                <circle cx="5" cy="9" r="2.2" />
-                <path d="M5 12.2c-.8 0-1.8.2-2.5.6-.9.5-1.5 1.4-1.5 2.5V17h3.8v-1.7c0-1.3.5-2.3 1.2-3.1-.3 0-.7 0-1 0z" />
-                <circle cx="19" cy="9" r="2.2" />
-                <path d="M19 12.2c.3 0 .7 0 1 0 .7.8 1.2 1.8 1.2 3.1V17H23v-1.7c0-1.1-.6-2-1.5-2.5-.7-.4-1.7-.6-2.5-.6z" />
-            </svg>
-        ),
-    },
-    {
-        title: 'Personalized Mentoring',
-        description: 'One-to-one guidance for all-round development.',
-        color: '#475569', // Slate Teal / Charcoal
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <circle cx="10" cy="8" r="4" />
-                <path d="M10 13.5c-3.3 0-8 1.7-8 4.5V20h10.5c-.3-.6-.5-1.3-.5-2 0-1.8 1-3.3 2.5-4.1-.7-.3-1.6-.4-2.5-.4z" />
-                <path d="M18 13c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm-1 7.2l-2.5-2.5 1.4-1.4 1.1 1.1 3.1-3.1 1.4 1.4-4.5 4.5z" />
-            </svg>
-        ),
-    },
-    {
-        title: 'Smart Learning Tools',
-        description: 'Effective use of modern educational software.',
-        color: '#06b6d4', // Bright Cyan
-        icon: (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M20 15V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v9c-1.1 0-2 .9-2 2v1h20v-1c0-1.1-.9-2-2-2zm-14-9h12v9H6V6zm-2 12c0-.5.5-1 1-1h14c.5 0 1 .5 1 1H4z" />
-            </svg>
-        ),
+        icon: 'fa-briefcase',
     },
 ];
 
+const bottomPractices: PracticeItem[] = [
+    {
+        id: 'bp-6',
+        num: '06',
+        title: 'Collaborative Learning',
+        description: 'Continuous evaluation and teamwork-focused environment.',
+        icon: 'fa-users',
+    },
+    {
+        id: 'bp-7',
+        num: '07',
+        title: 'Vibrant Student Clubs',
+        description: 'Active participation in extracurricular activities.',
+        icon: 'fa-sitemap',
+    },
+    {
+        id: 'bp-8',
+        num: '08',
+        title: 'Personalized Mentoring',
+        description: 'One-to-one guidance for all-round development.',
+        icon: 'fa-user',
+    },
+    {
+        id: 'bp-9',
+        num: '09',
+        title: 'Competitive Exam Prep',
+        description: 'Guidance and resources for national exams.',
+        icon: 'fa-file-text-o',
+    },
+    {
+        id: 'bp-10',
+        num: '10',
+        title: 'Smart Learning Tools',
+        description: 'Effective use of modern educational software.',
+        icon: 'fa-laptop',
+    },
+];
+
+const allPracticeIds = [
+    'bp-1', 'bp-2', 'bp-3', 'bp-4', 'bp-5',
+    'bp-6', 'bp-7', 'bp-8', 'bp-9', 'bp-10'
+];
+
 export default function BestPractices() {
+    const [hoveredId, setHoveredId] = useState<string | null>(null);
+    const [autoCycleIdx, setAutoCycleIdx] = useState<number>(0);
+
+    // Dynamic auto-cycle pulse when user is not hovering
+    useEffect(() => {
+        if (hoveredId !== null) return;
+        const timer = setInterval(() => {
+            setAutoCycleIdx((prev) => (prev + 1) % allPracticeIds.length);
+        }, 2800);
+        return () => clearInterval(timer);
+    }, [hoveredId]);
+
+    const activeId = hoveredId !== null ? hoveredId : allPracticeIds[autoCycleIdx];
+
     return (
-        <section id="best-practices" className="wow fadeInUp best-practices-section">
-            <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                    <span className="ref-badge">
-                        <i className="fa fa-star" />Academic Distinction
-                    </span>
+        <section id="best-practices" className="best-practices-section-redesign">
+            {/* ── Ambient Background Layer (Concentric Rings, Dot Matrices & Campus Silhouette) ── */}
+            <div className="bp-bg-ambient-layer" aria-hidden="true">
+                {/* Top-Left Concentric Ambient Rings */}
+                <div className="bp-concentric-rings-left">
+                    <div className="bp-ring bp-ring-1" />
+                    <div className="bp-ring bp-ring-2" />
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '14px' }}>
-                    Best <span className="grad-cyan">Practices</span>
-                </h2>
-                <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', maxWidth: '640px', margin: '0 auto 50px', lineHeight: 1.6 }}>
-                    Nurturing holistic development, industry-readiness, and academic excellence through modern pedagogy and world-class educational practices.
-                </p>
 
-                {/* 10 Cards Grid (2 rows of 5 on desktop) */}
-                <div className="best-practices-grid">
-                    {practices.map((item, index) => (
-                        <div key={index} className="practice-card" style={{ '--accent-color': item.color } as React.CSSProperties}>
-                            {/* Icon Box */}
-                            <div className="practice-icon-box" style={{ backgroundColor: item.color }}>
-                                {item.icon}
-                            </div>
+                {/* Top-Right Concentric Ambient Rings */}
+                <div className="bp-concentric-rings-right">
+                    <div className="bp-ring bp-ring-3" />
+                    <div className="bp-ring bp-ring-4" />
+                </div>
 
-                            {/* Title */}
-                            <h4 className="practice-title">{item.title}</h4>
-
-                            {/* Description */}
-                            <p className="practice-desc">{item.description}</p>
-                        </div>
+                {/* Top-Left Dot Matrix */}
+                <div className="bp-dot-matrix bp-matrix-left">
+                    {Array.from({ length: 20 }).map((_, i) => (
+                        <span key={i} className="bp-matrix-dot" />
                     ))}
                 </div>
+
+                {/* Top-Right Dot Matrix */}
+                <div className="bp-dot-matrix bp-matrix-right">
+                    {Array.from({ length: 20 }).map((_, i) => (
+                        <span key={i} className="bp-matrix-dot" />
+                    ))}
+                </div>
+
+                {/* Bottom-Right Dot Matrix */}
+                <div className="bp-dot-matrix bp-matrix-bottom-right">
+                    {Array.from({ length: 15 }).map((_, i) => (
+                        <span key={i} className="bp-matrix-dot" />
+                    ))}
+                </div>
+
+                {/* Bottom Campus Architectural Silhouette Banner Matching Reference */}
+                <div className="bp-campus-skyline-bg" />
             </div>
 
-            <style jsx>{`
-                .best-practices-section {
-                    position: relative;
-                    padding: 90px 0 100px;
-                    background-color: #f8fafc;
-                    /* Subtle technical grid pattern from screenshot */
-                    background-image: 
-                        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-                    background-size: 24px 24px;
-                    overflow: hidden;
-                }
+            <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1440px', width: '100%' }}>
+                {/* ── Section Header ── */}
+                <div className="bp-header">
+                    <h2 className="bp-heading">
+                        Best <span>Practices</span>
+                    </h2>
+                    {/* Underline for Best Practices heading matching About Us */}
+                    <div className="bp-heading-accent-bar" />
+                    <p className="bp-subtitle">
+                        Nurturing holistic development, industry-readiness, and academic excellence through modern pedagogy and world-class educational practices.
+                    </p>
+                </div>
 
-                .best-practices-grid {
-                    display: grid;
-                    grid-template-columns: repeat(5, 1fr);
-                    gap: 22px;
-                }
+                {/* ── Flowing Wave Timeline Stage ── */}
+                <div className="bp-timeline-stage">
+                    {/* SVG Flowing Sine Ribbon Wave */}
+                    <div className="bp-wave-svg-container" aria-hidden="true">
+                        <svg className="bp-wave-svg" viewBox="0 0 1440 180" preserveAspectRatio="none" fill="none">
+                            <defs>
+                                <linearGradient id="bpWaveRibbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.4" />
+                                    <stop offset="25%" stopColor="#3B82F6" stopOpacity="0.55" />
+                                    <stop offset="50%" stopColor="#60A5FA" stopOpacity="0.5" />
+                                    <stop offset="75%" stopColor="#3B82F6" stopOpacity="0.55" />
+                                    <stop offset="100%" stopColor="#93C5FD" stopOpacity="0.4" />
+                                </linearGradient>
+                                <linearGradient id="bpWaveLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.8" />
+                                    <stop offset="50%" stopColor="#2563EB" stopOpacity="1" />
+                                    <stop offset="100%" stopColor="#93C5FD" stopOpacity="0.8" />
+                                </linearGradient>
+                            </defs>
+                            {/* Translucent smooth ribbon band */}
+                            <path
+                                d="M 0 90 Q 144 55 288 90 T 576 90 T 864 90 T 1152 90 T 1440 90 L 1440 114 Q 1296 79 1152 114 T 864 114 T 576 114 T 288 114 T 0 114 Z"
+                                fill="url(#bpWaveRibbonGrad)"
+                            />
+                            {/* Central guiding spine line */}
+                            <path
+                                d="M 0 90 Q 144 55 288 90 T 576 90 T 864 90 T 1152 90 T 1440 90"
+                                stroke="url(#bpWaveLineGrad)"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </div>
 
-                .practice-card {
-                    background: #ffffff;
-                    border: 1px solid rgba(15, 23, 42, 0.08);
-                    border-radius: 20px;
-                    padding: 34px 20px 28px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
-                    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                                border-color 0.3s ease;
-                    cursor: default;
-                    position: relative;
-                }
+                    {/* TOP ROW: Items 01 to 05 */}
+                    <div className="bp-row bp-row-top">
+                        {topPractices.map((item) => {
+                            const isActive = activeId === item.id;
+                            return (
+                                <div
+                                    key={item.id}
+                                    className={`bp-node-item bp-node-top ${isActive ? 'active' : ''}`}
+                                    onMouseEnter={() => setHoveredId(item.id)}
+                                    onMouseLeave={() => setHoveredId(null)}
+                                >
+                                    <div className="bp-node-card">
+                                        {/* Glass Floating Icon Orb */}
+                                        <div className="bp-icon-orb">
+                                            <i className={`fa ${item.icon}`} />
+                                        </div>
 
-                .practice-card:hover {
-                    transform: translateY(-8px);
-                    box-shadow: 0 18px 36px -6px rgba(15, 23, 42, 0.12),
-                                0 6px 16px -2px rgba(15, 23, 42, 0.06);
-                    border-color: rgba(15, 23, 42, 0.16);
-                }
+                                        {/* Text Info */}
+                                        <div className="bp-node-body">
+                                            <div className="bp-num-row">
+                                                <span className="bp-num">{item.num}</span>
+                                                <span className="bp-num-dash" />
+                                            </div>
+                                            <h4 className="bp-title">{item.title}</h4>
+                                            <p className="bp-desc">{item.description}</p>
+                                        </div>
+                                    </div>
 
-                .practice-icon-box {
-                    width: 58px;
-                    height: 58px;
-                    border-radius: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 22px;
-                    box-shadow: 0 8px 18px -4px rgba(15, 23, 42, 0.18);
-                    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-                }
+                                    {/* Vertical Connector Line to Wave */}
+                                    <div className="bp-connector-line bp-connector-down">
+                                        <span className="bp-anchor-dot" />
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
 
-                .practice-card:hover .practice-icon-box {
-                    transform: scale(1.08) translateY(-2px);
-                }
+                    {/* BOTTOM ROW: Items 06 to 10 */}
+                    <div className="bp-row bp-row-bottom">
+                        {bottomPractices.map((item) => {
+                            const isActive = activeId === item.id;
+                            return (
+                                <div
+                                    key={item.id}
+                                    className={`bp-node-item bp-node-bottom ${isActive ? 'active' : ''}`}
+                                    onMouseEnter={() => setHoveredId(item.id)}
+                                    onMouseLeave={() => setHoveredId(null)}
+                                >
+                                    {/* Vertical Connector Line from Wave */}
+                                    <div className="bp-connector-line bp-connector-up">
+                                        <span className="bp-anchor-dot" />
+                                    </div>
 
-                .practice-title {
-                    font-size: 16px;
-                    font-weight: 700;
-                    color: #0f172a;
-                    margin: 0 0 10px 0;
-                    line-height: 1.35;
-                    font-family: var(--font-h, 'Montserrat', sans-serif);
-                }
+                                    <div className="bp-node-card">
+                                        {/* Glass Floating Icon Orb */}
+                                        <div className="bp-icon-orb">
+                                            <i className={`fa ${item.icon}`} />
+                                        </div>
 
-                .practice-desc {
-                    font-size: 13.5px;
-                    color: #64748b;
-                    line-height: 1.55;
-                    margin: 0;
-                }
-
-                @media (max-width: 1200px) {
-                    .best-practices-grid {
-                        grid-template-columns: repeat(3, 1fr);
-                        gap: 20px;
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    .best-practices-section {
-                        padding: 60px 0 75px;
-                    }
-                    .best-practices-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                        gap: 16px;
-                    }
-                    .practice-card {
-                        padding: 26px 16px 22px;
-                        border-radius: 16px;
-                    }
-                    .practice-icon-box {
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 14px;
-                        margin-bottom: 16px;
-                    }
-                    .practice-title {
-                        font-size: 15px;
-                    }
-                    .practice-desc {
-                        font-size: 12.5px;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .best-practices-grid {
-                        grid-template-columns: 1fr;
-                        max-width: 340px;
-                        margin: 0 auto;
-                    }
-                }
-            `}</style>
+                                        {/* Text Info */}
+                                        <div className="bp-node-body">
+                                            <div className="bp-num-row">
+                                                <span className="bp-num">{item.num}</span>
+                                                <span className="bp-num-dash" />
+                                            </div>
+                                            <h4 className="bp-title">{item.title}</h4>
+                                            <p className="bp-desc">{item.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }
