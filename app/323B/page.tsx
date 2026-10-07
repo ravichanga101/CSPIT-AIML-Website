@@ -24,22 +24,6 @@ export default function Lab323B() {
                     qty: 1,
                     type: "Interactive Flat Panel",
                     icon: "fa-tv"
-                },
-                {
-                    name: "Sarthi DLC (Stabilizer) DPC 0.5 KVA DPC",
-                    specs: "Power conditioning & line stabilization unit",
-                    year: "2024",
-                    qty: 1,
-                    type: "Stabilizer",
-                    icon: "fa-bolt"
-                },
-                {
-                    name: "Cisco Catalyst 9200L 24Port data, 4x10G Network Switch",
-                    specs: "High speed 24-port switch with 4x10G uplinks",
-                    year: "2025",
-                    qty: 2,
-                    type: "Network Switch",
-                    icon: "fa-sitemap"
                 }
             ]}
         />

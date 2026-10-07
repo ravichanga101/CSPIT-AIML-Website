@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import SectionBackground from '@/components/SectionBackground';
 
 interface ClubMember {
     role: string;
@@ -149,14 +150,27 @@ export default function StudentClubs() {
     }, [selectedClub]);
 
     return (
-        <section id="student-clubs" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0' }}>
-            <div className="container">
+        <section
+            id="student-clubs"
+            className="wow fadeInUp"
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%)',
+                borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '90px 0',
+            }}
+        >
+            <SectionBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-users" />Student Community</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Student <span className="grad-green">Clubs</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '48px' }} />
                 <div className="row" style={{ justifyContent: 'center' }}>
                     {clubs.map((club, i) => (
                         <div key={i} className="col-lg-4 col-md-6" style={{ marginBottom: '28px' }}>
@@ -356,13 +370,6 @@ export default function StudentClubs() {
                                     <i className="fa fa-external-link" />
                                 </a>
                             ) : <div />}
-                            <button
-                                type="button"
-                                className="academic-modal-close-btn"
-                                onClick={() => setSelectedClub(null)}
-                            >
-                                Close
-                            </button>
                         </div>
                     </div>
                 </div>,

@@ -1,5 +1,6 @@
 'use client';
 import { config, links } from '@/lib/config';
+import SectionBackground from '@/components/SectionBackground';
 
 const cards = [
     { icon: 'fa-map-marker', label: 'Address', color: '#0c2e8a', content: <address style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.8, margin: 0, fontStyle: 'normal' }} dangerouslySetInnerHTML={{ __html: config.contact_address }} /> },
@@ -9,14 +10,27 @@ const cards = [
 
 export default function ContactUs() {
     return (
-        <section id="contact" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '90px 0' }}>
-            <div className="container">
+        <section
+            id="contact"
+            className="wow fadeInUp"
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%)',
+                borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '90px 0',
+            }}
+        >
+            <SectionBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-paper-plane" />Get in Touch</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Contact <span className="grad-cyan">Us</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '16px' }} />
                 <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', marginBottom: '50px' }}>
                     We&apos;d love to hear from you. Reach out to us anytime.
                 </p>

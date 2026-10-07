@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
+import SectionBackground from '@/components/SectionBackground';
 
 export default function LeadershipMessages() {
     return (
         <section id="leadership" className="wow fadeInUp leadership-section">
-            <div className="container">
+            <SectionBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 {/* Section Header */}
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                     <span className="ref-badge">
@@ -13,9 +15,10 @@ export default function LeadershipMessages() {
                         Institutional Leadership
                     </span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '14px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Leadership <span className="grad-cyan">Desk</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '16px' }} />
                 <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', maxWidth: '640px', margin: '0 auto 52px', lineHeight: 1.6 }}>
                     Strategic vision, educational excellence, and inspirational guidance from our academic leaders.
                 </p>
@@ -97,12 +100,9 @@ export default function LeadershipMessages() {
                 .leadership-section {
                     position: relative;
                     padding: 90px 0 100px;
-                    background-color: #f8fafc;
-                    /* Subtle technical grid background */
-                    background-image: 
-                        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-                    background-size: 24px 24px;
+                    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%);
+                    border-top: 1px solid rgba(226, 232, 240, 0.8);
+                    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
                     overflow: hidden;
                 }
 

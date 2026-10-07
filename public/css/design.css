@@ -512,7 +512,8 @@ section[id] {
   display: none !important;
   border-radius: 14px !important;
   padding: 8px !important;
-  min-width: 250px !important;
+  min-width: 280px !important;
+  max-width: 380px !important;
   list-style: none !important;
   z-index: 10000 !important;
   margin: 6px 0 0 0 !important;
@@ -614,6 +615,16 @@ section[id] {
   box-shadow: inset 3px 0 0 #2563EB !important;
   padding-left: 20px !important;
   text-shadow: none !important;
+}
+
+.nav-sub-note {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  opacity: 0.8 !important;
+  margin-top: 3px !important;
+  line-height: 1.35 !important;
+  letter-spacing: normal !important;
 }
 
 /* Base navbar fallback for non-pill pages if any */
@@ -2179,51 +2190,81 @@ section,
   color: #2563EB !important;
 }
 
-/* ── Section heading ── */
-.ref-heading {
+/* ── Unified Section heading matching About Us ── */
+.ref-heading,
+.about-main-title,
+.bp-heading,
+.cert-main-heading,
+.chapter-main-title,
+.cell-main-title,
+.cdpc-main-title {
   font-family: var(--font-h) !important;
-  font-weight: 800 !important;
-  font-size: clamp(2.2rem, 4vw, 3.2rem) !important;
-  color: #1E3A5F !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.18 !important;
-  margin: 14px auto 48px !important;
+  font-weight: 900 !important;
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem) !important;
+  color: #0F172A !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.08 !important;
+  margin: 0 auto !important;
+  text-align: center !important;
 }
 
 /* If followed directly by a subtitle paragraph */
 .ref-heading:has(+ p),
 .ref-heading.has-sub {
-  margin-bottom: 24px !important;
+  margin-bottom: 0 !important;
 }
 
 .ref-heading + p {
   color: #64748b !important;
   font-size: 15.5px !important;
   line-height: 1.7 !important;
-  margin-top: 0 !important;
-  margin-bottom: 56px !important;
+  margin-top: 14px !important;
+  margin-bottom: 46px !important;
 }
 
 #faculty-achievements .ref-heading {
-  margin-bottom: 24px !important;
+  margin-bottom: 0 !important;
 }
 
 #faculty-achievements .ref-heading + p {
-  margin-top: 0 !important;
-  margin-bottom: 56px !important;
+  margin-top: 14px !important;
+  margin-bottom: 46px !important;
   color: #64748b !important;
   line-height: 1.7 !important;
 }
 
+.about-main-title span,
+.bp-heading span,
+.ref-heading span,
 .ref-heading .grad-cyan,
 .ref-heading .grad-violet,
 .ref-heading .grad-green,
-.ref-heading .grad-amber {
-  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #3B82F6 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+.ref-heading .grad-amber,
+.cert-heading-blue,
+.chapter-title-blue,
+.cell-title-blue,
+.cdpc-title-blue {
+  color: #2563EB !important;
   display: inline-block !important;
+  background: none !important;
+  -webkit-text-fill-color: #2563EB !important;
+}
+
+/* Unified Accent Bar Underline matching About Us */
+.about-title-accent-bar,
+.bp-heading-accent-bar,
+.cert-title-accent-bar,
+.chapter-title-accent-bar,
+.cell-title-accent-bar,
+.recruiters-title-accent-bar,
+.cdpc-title-accent-bar {
+  width: 52px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%) !important;
+  margin: 14px auto 48px;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.35) !important;
+  display: block !important;
 }
 
 /* ── General Light card ── */
@@ -2250,6 +2291,7 @@ section.v_m {
   border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
   padding: 96px 0 !important;
   position: relative !important;
+  overflow: hidden !important;
 }
 
 section.v_m .row {
@@ -2261,116 +2303,6 @@ section.v_m #vision,
 section.v_m #mission {
   margin-bottom: 0 !important;
   display: flex !important;
-}
-
-section.v_m #vision > div,
-section.v_m #mission > div {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(219, 234, 254, 0.9) !important;
-  border-radius: 18px !important;
-  padding: 38px 34px !important;
-  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.05) !important;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-section.v_m #vision > div > div:first-child {
-  height: 4px !important;
-  background: linear-gradient(90deg, #1E3A5F, #2563EB) !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-}
-
-section.v_m #mission > div > div:first-child {
-  height: 4px !important;
-  background: linear-gradient(90deg, #2563EB, #38BDF8) !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-}
-
-section.v_m #vision > div:hover,
-section.v_m #mission > div:hover {
-  transform: translateY(-6px) !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 20px 42px rgba(37, 99, 235, 0.12) !important;
-}
-
-/* Icon box */
-section.v_m #vision > div > div:nth-child(2) > div,
-section.v_m #mission > div > div:nth-child(2) > div {
-  width: 52px !important;
-  height: 52px !important;
-  min-width: 52px !important;
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
-  border: 1px solid #BFDBFE !important;
-  border-radius: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-section.v_m #vision i.fa {
-  color: #1E3A5F !important;
-  font-size: 22px !important;
-  transition: all 0.3s ease !important;
-}
-
-section.v_m #mission i.fa {
-  color: #2563EB !important;
-  font-size: 22px !important;
-  transition: all 0.3s ease !important;
-}
-
-section.v_m #vision > div:hover > div:nth-child(2) > div,
-section.v_m #mission > div:hover > div:nth-child(2) > div {
-  background: #DBEAFE !important;
-  border-color: #60A5FA !important;
-  transform: scale(1.08) rotate(4deg) !important;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18) !important;
-}
-
-section.v_m #vision > div:hover i.fa,
-section.v_m #mission > div:hover i.fa {
-  color: #1D4ED8 !important;
-}
-
-section.v_m #vision h4,
-section.v_m #mission h4 {
-  font-family: var(--font-h) !important;
-  font-weight: 800 !important;
-  font-size: 1.45rem !important;
-  color: #1E3A5F !important;
-  margin: 0 !important;
-}
-
-section.v_m #vision p {
-  color: #334155 !important;
-  font-size: 15.5px !important;
-  line-height: 1.85 !important;
-  font-style: italic !important;
-  margin: 0 !important;
-}
-
-section.v_m #mission div:last-child {
-  color: #334155 !important;
-  font-size: 15px !important;
-  line-height: 1.8 !important;
-  font-style: normal !important;
-}
-
-section.v_m #mission li {
-  margin-bottom: 8px !important;
-  line-height: 1.75 !important;
-  color: #334155 !important;
 }
 
 /* ============================================================
@@ -2450,374 +2382,36 @@ section:has(.fa-user-circle-o) .col-lg-6 > div:hover > span {
 /* ============================================================
    3. CAREER DEVELOPMENT & PLACEMENT SECTION
    ============================================================ */
+section#career-development,
 section#about {
-  background: #FFFFFF !important;
-  border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  padding: 96px 0 !important;
-}
-
-/* Description card */
-section#about .col-lg-10 > div:first-child {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F9FBFE 100%) !important;
-  border: 1px solid rgba(219, 234, 254, 0.9) !important;
-  border-left: 5px solid #2563EB !important;
-  border-radius: 18px !important;
-  padding: 38px 42px !important;
-  margin-bottom: 28px !important;
-  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.05) !important;
-  transition: all 0.3s ease !important;
   position: relative !important;
-}
-
-section#about .col-lg-10 > div:first-child:hover {
-  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.09) !important;
-  border-color: #93C5FD !important;
-}
-
-section#about .col-lg-10 > div:first-child p {
-  color: #334155 !important;
-  font-size: 16px !important;
-  line-height: 1.85 !important;
-  font-weight: 400 !important;
-  margin: 0 !important;
-}
-
-/* Activities container */
-section#about .col-lg-10 > div:nth-child(2) {
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 18px !important;
-  padding: 36px 40px !important;
-  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.04) !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) h5 {
-  color: #1E3A5F !important;
-  font-family: var(--font-h) !important;
-  font-weight: 800 !important;
-  font-size: 1.15rem !important;
-  margin-bottom: 24px !important;
-  letter-spacing: -0.01em !important;
-}
-
-/* Activity pill cards */
-section#about .col-lg-10 > div:nth-child(2) > div > div {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(226, 232, 240, 0.9) !important;
-  border-radius: 12px !important;
-  padding: 13px 18px !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  cursor: default !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) > div > div:hover {
-  transform: translateY(-3px) !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1) !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) > div > div > div {
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px !important;
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
-  border: 1px solid #BFDBFE !important;
-  border-radius: 9px !important;
-  color: #1D4ED8 !important;
-  font-size: 14px !important;
-  transition: all 0.25s ease !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) > div > div:hover > div {
-  background: #DBEAFE !important;
-  border-color: #60A5FA !important;
-  color: #1D4ED8 !important;
-  transform: scale(1.08) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.16) !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) > div > div:hover i.fa {
-  color: #1D4ED8 !important;
-}
-
-section#about .col-lg-10 > div:nth-child(2) > div > div > span {
-  color: #1E293B !important;
-  font-size: 13.5px !important;
-  font-weight: 500 !important;
-  line-height: 1.45 !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%) !important;
+  z-index: 2 !important;
 }
 
 /* ============================================================
    4. CERTIFICATION COURSES SECTION
    ============================================================ */
-section:has(img[src*="/certifications/"]) {
-  background: linear-gradient(180deg, #F8FAFC 0%, #F0F6FF 50%, #F8FAFC 100%) !important;
-  border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  padding: 96px 0 !important;
+section#certifications {
+  position: relative !important;
 }
 
-section:has(img[src*="/certifications/"]) .ref-card {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(219, 234, 254, 0.9) !important;
-  border-top: 4px solid #2563EB !important;
-  border-radius: 18px !important;
-  padding: 30px 28px !important;
-  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.05) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  height: 100% !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card:hover {
-  transform: translateY(-6px) !important;
-  border-top-color: #1D4ED8 !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.12) !important;
-}
-
-/* Logo container */
-section:has(img[src*="/certifications/"]) .ref-card > div:first-child {
-  width: 130px !important;
-  min-width: 130px !important;
-  height: 86px !important;
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 12px !important;
-  transition: all 0.3s ease !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card:hover > div:first-child {
-  background: #FFFFFF !important;
-  border-color: #BFDBFE !important;
-  transform: scale(1.04) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08) !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card h4 {
-  font-family: var(--font-h) !important;
-  font-weight: 800 !important;
-  font-size: 1.15rem !important;
-  color: #1E3A5F !important;
-  margin-bottom: 6px !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card div > div:nth-child(2) {
-  font-size: 10.5px !important;
-  color: #64748B !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
-  font-weight: 700 !important;
-  margin-bottom: 6px !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card div > div:nth-child(3) {
-  font-weight: 700 !important;
-  font-size: 14.5px !important;
-  color: #1E293B !important;
-  margin-bottom: 8px !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card a {
-  color: #2563EB !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  text-decoration: none !important;
-  transition: all 0.2s ease !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-
-section:has(img[src*="/certifications/"]) .ref-card a:hover {
-  color: #1D4ED8 !important;
-  transform: translateX(2px) !important;
-}
 
 /* ============================================================
    5. STUDENT CHAPTERS & CELL INFORMATION
    ============================================================ */
 /* NPTEL Chapter */
-section:has(img[src*="nptel"]) {
-  background: #FFFFFF !important;
-  padding: 90px 0 60px !important;
-}
-
-section:has(img[src*="nptel"]) .ref-card {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(219, 234, 254, 0.9) !important;
-  border-top: 4px solid #2563EB !important;
-  border-radius: 18px !important;
-  padding: 36px 28px !important;
-  box-shadow: 0 6px 22px rgba(30, 58, 95, 0.05) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-section:has(img[src*="nptel"]) .ref-card:hover {
-  transform: translateY(-6px) !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12) !important;
-}
-
-section:has(img[src*="nptel"]) .ref-card > div:first-child {
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 14px !important;
-  padding: 16px 24px !important;
-  margin-bottom: 20px !important;
-  transition: all 0.3s ease !important;
-}
-
-section:has(img[src*="nptel"]) .ref-card:hover > div:first-child {
-  background: #FFFFFF !important;
-  border-color: #BFDBFE !important;
-  transform: scale(1.05) !important;
-}
-
-section:has(img[src*="nptel"]) .ref-card p {
-  color: #1E3A5F !important;
-  font-weight: 700 !important;
-  font-size: 15.5px !important;
+section#student-chapter {
+  position: relative !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%) !important;
+  z-index: 2 !important;
 }
 
 /* Cell Information */
-section:has(img[src*="/cell/"]) {
-  background: #F7F9FC !important;
-  border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  padding: 70px 0 96px !important;
-}
-
-.cell-card,
-section:has(img[src*="/cell/"]) .ref-card {
-  background: #FFFFFF !important;
-  border: 1px solid #E2E8F0 !important;
-  border-top: 3.5px solid #2563EB !important;
-  border-radius: 16px !important;
-  padding: 30px 24px !important;
-  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.04) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  height: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-
-.cell-card:hover,
-section:has(img[src*="/cell/"]) .ref-card:hover {
-  transform: translateY(-5px) !important;
-  border-top-color: #1D4ED8 !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12) !important;
-}
-
-.cell-card-title,
-section:has(img[src*="/cell/"]) .ref-card h4 {
-  font-family: var(--font-h) !important;
-  font-weight: 700 !important;
-  font-size: 15.5px !important;
-  color: #1E3A5F !important;
-  min-height: 44px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  line-height: 1.35 !important;
-  margin: 0 0 18px 0 !important;
-  width: 100% !important;
-}
-
-/* Compact, proportional logo showcase container — removes the wide empty space */
-.cell-logo-wrapper,
-section:has(img[src*="/cell/"]) .ref-card > div:nth-child(2) {
-  width: 136px !important;
-  height: 92px !important;
-  max-width: 136px !important;
-  margin: 0 auto 20px auto !important;
-  align-self: center !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: #FFFFFF !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 14px !important;
-  padding: 10px 14px !important;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
-  transition: all 0.3s ease !important;
-}
-
-.cell-card:hover .cell-logo-wrapper,
-section:has(img[src*="/cell/"]) .ref-card:hover .cell-logo-wrapper,
-section:has(img[src*="/cell/"]) .ref-card:hover > div:nth-child(2) {
-  background: #FFFFFF !important;
-  border-color: #93C5FD !important;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12) !important;
-  transform: translateY(-2px) scale(1.05) !important;
-}
-
-.cell-logo-img,
-section:has(img[src*="/cell/"]) .ref-card > div:nth-child(2) img {
-  max-width: 108px !important;
-  max-height: 70px !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  display: block !important;
-  margin: 0 auto !important;
-  filter: none !important;
-}
-
-.cell-faculty-info {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 8px !important;
-  width: 100% !important;
-  margin-top: 4px !important;
-}
-
-.cell-faculty-name,
-section:has(img[src*="/cell/"]) .ref-card span {
-  font-weight: 700 !important;
-  font-size: 14.5px !important;
-  color: #1E293B !important;
-  letter-spacing: -0.01em !important;
-  text-align: center !important;
-}
-
-.cell-email-link,
-section:has(img[src*="/cell/"]) .ref-card a {
-  color: #1D4ED8 !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  background: #EFF6FF !important;
-  border: 1px solid #DBEAFE !important;
-  padding: 6px 16px !important;
-  border-radius: 999px !important;
-  text-decoration: none !important;
-  transition: all 0.22s ease !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  max-width: 100% !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
-.cell-email-link:hover,
-section:has(img[src*="/cell/"]) .ref-card a:hover {
-  background: #DBEAFE !important;
-  color: #1E40AF !important;
-  border-color: #60A5FA !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.16) !important;
-  transform: translateY(-2px) !important;
+section#cell-information {
+  position: relative !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%) !important;
+  z-index: 2 !important;
 }
 
 .cell-badge-sub {

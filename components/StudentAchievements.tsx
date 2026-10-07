@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import SectionBackground from '@/components/SectionBackground';
 
 const achievements = [
     { img: '/img/students/student20.jpg', fallback: '/img/photos/1.jpg', badge: 'MathFlow AI', badgeColor: '#6366f1', name: 'AIML Students', course: 'B.Tech AI-ML', desc: 'Strong fundamentals meet effective AI education — students demonstrated outstanding performance at MathFlow AI, conducted by the Math for AI Club at CSPIT.' },
@@ -30,6 +31,9 @@ const achievements = [
 export default function StudentAchievements() {
     const [selectedAchievement, setSelectedAchievement] = useState<typeof achievements[0] | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [showAll, setShowAll] = useState(false);
+
+    const visibleAchievements = showAll ? achievements : achievements.slice(0, 9);
 
     useEffect(() => {
         setMounted(true);
@@ -57,16 +61,30 @@ export default function StudentAchievements() {
     }, [selectedAchievement]);
 
     return (
-        <section id="student-achievements" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0', scrollMarginTop: '100px' }}>
-            <div className="container">
+        <section
+            id="student-achievements"
+            className="wow fadeInUp"
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%)',
+                borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '90px 0',
+                scrollMarginTop: '100px',
+            }}
+        >
+            <SectionBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-trophy" />Our Pride</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Student <span className="grad-amber">Achievements</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '48px' }} />
                 <div className="row">
-                    {achievements.map((a, i) => (
+                    {visibleAchievements.map((a, i) => (
                         <div key={i} className="col-lg-4 col-md-6" style={{ marginBottom: '28px' }}>
                             <div
                                 className="ref-card"
@@ -123,7 +141,56 @@ export default function StudentAchievements() {
                         </div>
                     ))}
                 </div>
+
+                {/* View More / View Less Button */}
+                {achievements.length > 9 && (
+                    <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                        <button
+                            type="button"
+                            className="student-toggle-btn"
+                            onClick={() => setShowAll(!showAll)}
+                            aria-expanded={showAll}
+                        >
+                            <span>{showAll ? 'View Less' : 'View More'}</span>
+                            <i className={`fa ${showAll ? 'fa-chevron-up' : 'fa-chevron-down'}`} />
+                        </button>
+                    </div>
+                )}
             </div>
+
+            <style jsx>{`
+                .student-toggle-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: #ffffff;
+                    color: #2563eb;
+                    border: 1.5px solid #bfdbfe;
+                    border-radius: 9999px;
+                    padding: 12px 34px;
+                    font-size: 14.5px;
+                    font-weight: 700;
+                    letter-spacing: 0.2px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+                    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                    outline: none;
+                }
+                .student-toggle-btn:hover {
+                    background: #2563eb;
+                    color: #ffffff;
+                    border-color: #2563eb;
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+                }
+                .student-toggle-btn:active {
+                    transform: translateY(0);
+                }
+                .student-toggle-btn i {
+                    font-size: 12px;
+                    transition: transform 0.3s ease;
+                }
+            `}</style>
 
             {/* Student Achievement Modal Popup — Compact Card Style */}
             {mounted && selectedAchievement && createPortal(

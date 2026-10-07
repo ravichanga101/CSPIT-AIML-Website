@@ -261,7 +261,18 @@ export default function MainMenu() {
                                         <a href="https://drive.google.com/drive/folders/1CsUApZYDwfpl44itkin-ubXCAD0-FF5i?usp=drive_link" target="_blank" rel="noopener noreferrer">Syllabus</a>
                                     </li>
                                     <li>
+                                        <a href="https://drive.google.com/drive/folders/1aYBRcmhJJXvYBq8ojPKlc5AVUqZa6Cpi" target="_blank" rel="noopener noreferrer">Old Question Paper</a>
+                                    </li>
+                                    <li>
                                         <a href="https://charusat.edu.in:912/eGovernance/" target="_blank" rel="noopener noreferrer">Egovernance</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://egov.charusat//" target="_blank" rel="noopener noreferrer">
+                                            <span>Egovernance for Event Entry</span>
+                                            <span className="nav-sub-note" style={{ display: 'block', fontSize: '11px', fontWeight: 400, opacity: 0.82, marginTop: '3px', lineHeight: 1.3 }}>
+                                                (only accesible if you connect with charusat wifi)
+                                            </span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="https://charusat.edu.in:912/UniExamResult/" target="_blank" rel="noopener noreferrer">Exam Result</a>

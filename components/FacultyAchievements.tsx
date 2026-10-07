@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import SectionBackground from '@/components/SectionBackground';
 
 const facultyAchievements = [
     {
@@ -132,6 +133,9 @@ const facultyAchievements = [
 export default function FacultyAchievements() {
     const [selectedFaculty, setSelectedFaculty] = useState<typeof facultyAchievements[0] | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [showAll, setShowAll] = useState(false);
+
+    const visibleFaculty = showAll ? facultyAchievements : facultyAchievements.slice(0, 6);
 
     useEffect(() => {
         setMounted(true);
@@ -159,17 +163,30 @@ export default function FacultyAchievements() {
     }, [selectedFaculty]);
 
     return (
-        <section id="faculty-achievements" className="wow fadeInUp" style={{ background: '#f5f7fa', padding: '80px 0 96px' }}>
-            <div className="container">
+        <section
+            id="faculty-achievements"
+            className="wow fadeInUp"
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%)',
+                borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '80px 0 96px',
+            }}
+        >
+            <SectionBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 {/* Section badge */}
                 <div style={{ textAlign: 'center', marginBottom: '18px' }}>
                     <span className="ref-badge"><i className="fa fa-star" /> Faculty Excellence</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto 16px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Faculty <span className="grad-amber">Achievements</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '48px' }} />
                 <div className="row">
-                    {facultyAchievements.map((item, i) => (
+                    {visibleFaculty.map((item, i) => (
                         <div key={i} className="col-lg-6 col-md-12" style={{ marginBottom: '28px' }}>
                             <div
                                 className="ref-card"
@@ -243,7 +260,56 @@ export default function FacultyAchievements() {
                         </div>
                     ))}
                 </div>
+
+                {/* Show More / Show Less Button */}
+                {facultyAchievements.length > 6 && (
+                    <div style={{ textAlign: 'center', marginTop: '12px' }}>
+                        <button
+                            type="button"
+                            className="faculty-toggle-btn"
+                            onClick={() => setShowAll(!showAll)}
+                            aria-expanded={showAll}
+                        >
+                            <span>{showAll ? 'Show Less' : 'Show More'}</span>
+                            <i className={`fa ${showAll ? 'fa-chevron-up' : 'fa-chevron-down'}`} />
+                        </button>
+                    </div>
+                )}
             </div>
+
+            <style jsx>{`
+                .faculty-toggle-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: #ffffff;
+                    color: #2563eb;
+                    border: 1.5px solid #bfdbfe;
+                    border-radius: 9999px;
+                    padding: 12px 34px;
+                    font-size: 14.5px;
+                    font-weight: 700;
+                    letter-spacing: 0.2px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+                    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                    outline: none;
+                }
+                .faculty-toggle-btn:hover {
+                    background: #2563eb;
+                    color: #ffffff;
+                    border-color: #2563eb;
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+                }
+                .faculty-toggle-btn:active {
+                    transform: translateY(0);
+                }
+                .faculty-toggle-btn i {
+                    font-size: 12px;
+                    transition: transform 0.3s ease;
+                }
+            `}</style>
 
             {/* Faculty Achievement Modal Popup — Compact Card Style */}
             {mounted && selectedFaculty && createPortal(

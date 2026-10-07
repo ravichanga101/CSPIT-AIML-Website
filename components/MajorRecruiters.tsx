@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import SectionBackground from '@/components/SectionBackground';
 
 // Row 1: 11 Companies (Continuously moving Left -> Right)
 // Row 2: 11 Companies (Continuously moving Right -> Left)
@@ -331,6 +332,7 @@ const row2Items = [...row2Recruiters, ...row2Recruiters, ...row2Recruiters];
 export default function MajorRecruiters() {
     return (
         <section id="clients" className="wow fadeInUp recruiters-section">
+            <SectionBackground />
             <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                     <span className="ref-badge">
@@ -340,13 +342,14 @@ export default function MajorRecruiters() {
                 <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '12px' }}>
                     Major <span className="grad-cyan">Recruiters</span>
                 </h2>
+                <div className="recruiters-title-accent-bar" />
                 <p style={{ textAlign: 'center', color: '#64748b', fontSize: '15px', maxWidth: '640px', margin: '0 auto 40px', lineHeight: 1.6 }}>
                     Top tech enterprises, unicorns, and Fortune 500 multinationals recruiting AI &amp; Machine Learning talent from CSPIT.
                 </p>
             </div>
 
             {/* Marquee Wrapper with side gradient masks */}
-            <div className="recruiters-marquee-container">
+            <div className="recruiters-marquee-container" style={{ position: 'relative', zIndex: 2 }}>
                 {/* Row 1: Left -> Right */}
                 <div className="recruiters-row-wrapper">
                     <div className="recruiters-track row-ltr">
@@ -375,13 +378,20 @@ export default function MajorRecruiters() {
                 .recruiters-section {
                     position: relative;
                     padding: 85px 0 95px;
-                    background-color: #f8fafc;
-                    /* Subtle technical grid pattern from screenshot */
-                    background-image: 
-                        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-                    background-size: 24px 24px;
+                    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%);
+                    border-top: 1px solid rgba(226, 232, 240, 0.8);
+                    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
                     overflow: hidden;
+                }
+
+                .recruiters-title-accent-bar {
+                    width: 52px;
+                    height: 4px;
+                    border-radius: 999px;
+                    background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
+                    margin: 14px auto 18px;
+                    box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+                    display: block;
                 }
 
                 .recruiters-marquee-container {

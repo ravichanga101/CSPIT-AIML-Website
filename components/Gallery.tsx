@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import GalleryBackground from '@/components/GalleryBackground';
 
 interface GalleryProps {
     images: string[];
@@ -12,14 +13,27 @@ export default function Gallery({ images }: GalleryProps) {
 
 
     return (
-        <section id="portfolio" className="wow fadeInUp" style={{ background: '#ffffff', padding: '90px 0' }}>
-            <div className="container">
+        <section
+            id="portfolio"
+            className="wow fadeInUp"
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #F0F6FF 100%)',
+                borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '90px 0',
+            }}
+        >
+            <GalleryBackground />
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <span className="ref-badge"><i className="fa fa-image" />Department Life</span>
                 </div>
-                <h2 className="ref-heading" style={{ textAlign: 'center', marginBottom: '16px' }}>
+                <h2 className="ref-heading" style={{ textAlign: 'center', margin: '0 auto' }}>
                     Department <span className="grad-violet">Gallery</span>
                 </h2>
+                <div className="about-title-accent-bar" style={{ marginBottom: '48px' }} />
 
                 <div className="row" style={{ margin: '0 -8px' }}>
                     {visible.map((src, i) => (

@@ -24,22 +24,6 @@ export default function Lab325() {
                     qty: 1,
                     type: "Interactive Flat Panel",
                     icon: "fa-tv"
-                },
-                {
-                    name: "U6-LR Ubiquiti UAP-AC PRO Wifi Router",
-                    specs: "Long-range high performance dual-band wireless access point",
-                    year: "2022",
-                    qty: 1,
-                    type: "Wireless Networking",
-                    icon: "fa-wifi"
-                },
-                {
-                    name: "Cisco Catalyst 2960 - X24 GigE 4XIG SFP LANBASE Network Switch",
-                    specs: "Enterprise Gigabit Ethernet switch infrastructure",
-                    year: "2019",
-                    qty: 3,
-                    type: "Network Switch",
-                    icon: "fa-sitemap"
                 }
             ]}
         />

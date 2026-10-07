@@ -280,30 +280,54 @@ section#about_us.about-section-redesign,
   color: #2563EB;
 }
 
-.about-main-title {
+.about-main-title,
+.bp-heading,
+.ref-heading,
+.cert-main-heading,
+.chapter-main-title,
+.cell-main-title,
+.cdpc-main-title {
   font-family: var(--font-h);
   font-weight: 900;
-  font-size: clamp(1.75rem, 2.5vw, 2.1rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   color: #0F172A !important;
-  margin: 0;
+  margin: 0 auto;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.08;
+  text-align: center;
 }
 
-.about-main-title span {
+.about-main-title span,
+.bp-heading span,
+.ref-heading span,
+.ref-heading .grad-cyan,
+.ref-heading .grad-violet,
+.ref-heading .grad-green,
+.ref-heading .grad-amber,
+.cert-heading-blue,
+.chapter-title-blue,
+.cell-title-blue,
+.cdpc-title-blue {
   color: #2563EB !important;
   display: inline-block;
   background: none !important;
-  -webkit-text-fill-color: initial !important;
+  -webkit-text-fill-color: #2563EB !important;
 }
 
-.about-title-accent-bar {
-  width: 36px;
-  height: 3px;
+.about-title-accent-bar,
+.bp-heading-accent-bar,
+.cert-title-accent-bar,
+.chapter-title-accent-bar,
+.cell-title-accent-bar,
+.recruiters-title-accent-bar,
+.cdpc-title-accent-bar {
+  width: 52px;
+  height: 4px;
   border-radius: 999px;
   background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
-  margin: 4px auto 0;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+  margin: 14px auto 48px;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+  display: block;
 }
 
 /* Two-column Main Grid */
@@ -829,18 +853,19 @@ section#best-practices.best-practices-section-redesign,
 .bp-heading {
   font-family: var(--font-h);
   font-weight: 900;
-  font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   color: #0F172A !important;
-  margin: 0;
+  margin: 0 auto;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.08;
+  text-align: center;
 }
 
 .bp-heading span {
   color: #2563EB !important;
   display: inline-block;
   background: none !important;
-  -webkit-text-fill-color: initial !important;
+  -webkit-text-fill-color: #2563EB !important;
 }
 
 /* Underline matching About Us */
@@ -849,8 +874,9 @@ section#best-practices.best-practices-section-redesign,
   height: 4px;
   border-radius: 999px;
   background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
-  margin: 10px auto 0;
+  margin: 14px auto 20px;
   box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+  display: block;
 }
 
 .bp-subtitle {
